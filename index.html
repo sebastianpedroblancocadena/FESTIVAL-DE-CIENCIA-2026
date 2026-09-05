@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festival de Ciencia Bolivia 2026</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='6' fill='%235CE1FF'/><ellipse cx='50' cy='50' rx='40' ry='16' fill='none' stroke='%235CE1FF' stroke-width='2.5' transform='rotate(0 50 50)'/><ellipse cx='50' cy='50' rx='40' ry='16' fill='none' stroke='%231EAE76' stroke-width='2.5' transform='rotate(60 50 50)'/><ellipse cx='50' cy='50' rx='40' ry='16' fill='none' stroke='%239382D4' stroke-width='2.5' transform='rotate(120 50 50)'/></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --purple-deep: #311B53;
+            --navy-dark: #23255C;
+            --cyan: #5CE1FF;
+            --green: #1EAE76;
+            --lila: #9382D4;
+            --white: #FFFFFF;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--purple-deep);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ============ ANIMATED BACKGROUND ============ */
+        #animatedBg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ============ NAV ============ */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: all 0.3s ease;
+        }
+        nav.scrolled {
+            background: rgba(35, 37, 92, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+        .nav-left { display: flex; align-items: center; gap: 1rem; }
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem; font-weight: 700; color: var(--cyan);
+        }
+        .lang-toggle {
+            background: var(--navy-dark);
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+        }
+        .lang-toggle:hover {
+            background: var(--cyan);
+            color: var(--navy-dark);
+        }
+        .nav-links {
+            display: flex; gap: 2rem; list-style: none;
+        }
+        .nav-links a {
+            color: var(--white); text-decoration: none; font-weight: 500;
+            transition: color 0.3s; font-size: 0.9rem;
+        }
+        .nav-links a:hover { color: var(--cyan); }
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001;
+        }
+        .hamburger span {
+            width: 25px; height: 2px; background: var(--white); transition: all 0.3s;
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            position: relative; padding: 6rem 2rem 2rem; overflow: hidden;
+        }
+        .hero-content { position: relative; z-index: 2; }
+        .hero-badge {
+            display: inline-block; padding: 0.5rem 1.5rem;
+            border: 1px solid var(--lila); border-radius: 50px;
+            color: var(--lila); font-size: 0.85rem; letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 1.5rem;
+            animation: fadeInDown 1s ease;
+            overflow: visible;
+            white-space: nowrap;
+        }
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 4.5rem); font-weight: 900;
+            line-height: 1.1; margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        .hero h1 .highlight {
+            background: linear-gradient(90deg, var(--cyan), var(--green));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            color: var(--lila); margin-bottom: 0.5rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+        .hero .date-badge {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.1rem, 2vw, 1.8rem);
+            color: var(--cyan); margin: 1.5rem 0; padding: 1rem 2rem;
+            border: 2px solid var(--cyan); border-radius: 12px;
+            display: inline-block; animation: fadeInUp 1s ease 0.6s both;
+            box-shadow: 0 0 30px rgba(92,225,255,0.2);
+        }
+        .hero .location {
+            font-size: 1.1rem; color: var(--white); margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+        .hero .location i { color: var(--green); margin-right: 0.5rem; }
+        .hero-buttons {
+            display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+            animation: fadeInUp 1s ease 1s both;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--cyan), #3aa8d8);
+            color: var(--navy-dark); padding: 1rem 2.5rem; border: none;
+            border-radius: 50px; font-size: 1.1rem; font-weight: 700;
+            cursor: pointer; text-decoration: none; transition: all 0.3s ease;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(92,225,255,0.4);
+        }
+        .btn-secondary {
+            background: transparent; color: var(--cyan);
+            padding: 1rem 2.5rem; border: 2px solid var(--cyan);
+            border-radius: 50px; font-size: 1.1rem; font-weight: 600;
+            cursor: pointer; text-decoration: none; transition: all 0.3s ease;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+        .btn-secondary:hover {
+            background: var(--cyan); color: var(--navy-dark);
+            transform: translateY(-3px);
+        }
+        .countdown {
+            display: flex; gap: 1.5rem; justify-content: center;
+            margin-top: 3rem; animation: fadeInUp 1s ease 1.2s both;
+        }
+        .countdown-item { text-align: center; }
+        .countdown-item .number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem; font-weight: 900; color: var(--cyan);
+            display: block; text-shadow: 0 0 20px rgba(92,225,255,0.5);
+        }
+        .countdown-item .label {
+            font-size: 0.8rem; color: var(--lila);
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        /* ============ SECTIONS ============ */
+        section {
+            padding: 5rem 2rem; max-width: 1200px; margin: 0 auto;
+            position: relative; z-index: 1;
+        }
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            text-align: center; margin-bottom: 1rem;
+        }
+        .section-title .accent { color: var(--cyan); }
+        .section-subtitle {
+            text-align: center; color: var(--lila);
+            margin-bottom: 3rem; font-size: 1.05rem;
+        }
+
+        /* ============ ABOUT ============ */
+        .about-section { padding: 5rem 0; }
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem; max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+        }
+        .about-card {
+            background: var(--navy-dark);
+            border: 1px solid rgba(92,225,255,0.2);
+            border-radius: 16px; padding: 2rem;
+            transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .about-card::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--cyan), var(--green));
+        }
+        .about-card:hover {
+            transform: translateY(-5px); border-color: var(--cyan);
+            box-shadow: 0 10px 40px rgba(92,225,255,0.15);
+        }
+        .about-card .icon {
+            width: 60px; height: 60px;
+            background: rgba(92,225,255,0.1); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; color: var(--cyan); margin-bottom: 1rem;
+        }
+        .about-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem; margin-bottom: 0.8rem; color: var(--cyan);
+        }
+        .about-card p {
+            color: rgba(255,255,255,0.8); line-height: 1.6; font-size: 0.95rem;
+        }
+
+        /* ============ GUEST ============ */
+        .guest-section { padding: 5rem 0; }
+        .guest-card {
+            max-width: 900px; margin: 0 auto;
+            background: var(--navy-dark);
+            border: 1px solid rgba(92,225,255,0.3);
+            border-radius: 20px; padding: 3rem;
+            display: flex; gap: 3rem; align-items: center;
+            position: relative; overflow: hidden;
+        }
+        .guest-card::before {
+            content: ''; position: absolute;
+            top: -50%; right: -50%; width: 100%; height: 200%;
+            background: radial-gradient(circle, rgba(30,174,118,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .guest-avatar {
+            width: 200px; height: 200px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--cyan), var(--green));
+            flex-shrink: 0; position: relative; z-index: 1;
+            overflow: hidden;
+            border: 3px solid rgba(92,225,255,0.4);
+            box-shadow: 0 0 30px rgba(92,225,255,0.2);
+        }
+        .guest-avatar img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .guest-info { position: relative; z-index: 1; }
+        .guest-label {
+            display: inline-block; padding: 0.3rem 1rem;
+            background: rgba(147,130,212,0.2); border: 1px solid var(--lila);
+            border-radius: 50px; color: var(--lila); font-size: 0.8rem;
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem;
+        }
+        .guest-info h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem; margin-bottom: 0.5rem;
+        }
+        .guest-info .title { color: var(--cyan); font-size: 1rem; margin-bottom: 1rem; }
+        .guest-info p { color: rgba(255,255,255,0.8); line-height: 1.7; }
+        .guest-stats { display: flex; gap: 2rem; margin-top: 1.5rem; }
+        .guest-stat { text-align: center; }
+        .guest-stat .num {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem; color: var(--cyan); display: block;
+        }
+        .guest-stat .desc {
+            font-size: 0.75rem; color: var(--lila); text-transform: uppercase;
+        }
+
+        /* ============ ORGANIZERS ============ */
+        .organizers-section { padding: 4rem 0; }
+        .organizers-grid {
+            display: flex; justify-content: center; align-items: center;
+            gap: 3rem; flex-wrap: wrap; max-width: 1000px;
+            margin: 0 auto; padding: 0 2rem;
+        }
+        .organizer { text-align: center; padding: 1.5rem; }
+        .organizer .org-icon {
+            width: 90px; height: 90px; background: var(--navy-dark);
+            border: 2px solid rgba(92,225,255,0.3); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 0.8rem; overflow: hidden;
+            transition: all 0.3s;
+        }
+        .organizer:hover .org-icon {
+            border-color: var(--cyan);
+            box-shadow: 0 0 20px rgba(92,225,255,0.3);
+            transform: scale(1.05);
+        }
+        .organizer .org-icon img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .organizer .org-name { font-size: 0.9rem; font-weight: 600; }
+
+        /* ============ SCHEDULE ============ */
+        .schedule-section { padding: 5rem 0; }
+        .schedule-tabs {
+            display: flex; justify-content: center; gap: 0.5rem;
+            flex-wrap: wrap; margin-bottom: 2rem; padding: 0 1rem;
+        }
+        .schedule-tab {
+            padding: 0.8rem 1.5rem; background: var(--navy-dark);
+            border: 1px solid rgba(92,225,255,0.2); border-radius: 12px;
+            color: var(--white); cursor: pointer; transition: all 0.3s;
+            font-weight: 600; font-size: 0.9rem; font-family: 'Inter', sans-serif;
+        }
+        .schedule-tab:hover, .schedule-tab.active {
+            background: var(--cyan); color: var(--navy-dark); border-color: var(--cyan);
+        }
+        .schedule-day {
+            display: none; max-width: 1000px; margin: 0 auto; padding: 0 1rem;
+        }
+        .schedule-day.active { display: block; }
+        .day-header {
+            background: var(--navy-dark); border: 1px solid var(--cyan);
+            border-radius: 16px; padding: 1.5rem 2rem; margin-bottom: 1.5rem;
+            display: flex; align-items: center; gap: 1rem;
+            box-shadow: 0 0 30px rgba(92,225,255,0.1);
+        }
+        .day-header .day-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem; color: var(--cyan);
+        }
+        .day-header .day-details h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .day-header .day-details .location {
+            color: var(--lila); font-size: 0.9rem;
+        }
+        .day-header .day-details .location i { margin-right: 0.3rem; }
+        .schedule-table {
+            width: 100%; border-collapse: separate; border-spacing: 0 0.5rem;
+        }
+        .schedule-table tr {
+            background: var(--navy-dark); transition: all 0.3s;
+        }
+        .schedule-table tr:hover {
+            background: rgba(92,225,255,0.08); transform: scale(1.01);
+        }
+        .schedule-table td {
+            padding: 1rem 1.2rem; vertical-align: top;
+        }
+        .schedule-table td:first-child {
+            border-radius: 10px 0 0 10px; width: 140px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem; color: var(--cyan); white-space: nowrap;
+        }
+        .schedule-table td:nth-child(2) { font-weight: 600; min-width: 200px; }
+        .schedule-table td:last-child {
+            border-radius: 0 10px 10px 0;
+            color: var(--lila); font-size: 0.9rem;
+        }
+        .schedule-table tr.highlight td {
+            border: 1px solid var(--green);
+            background: rgba(30,174,118,0.1);
+        }
+        .schedule-table tr.highlight td:first-child {
+            border-radius: 10px 0 0 10px;
+            border: 1px solid var(--green); border-right: none;
+        }
+        .schedule-table tr.highlight td:last-child {
+            border-radius: 0 10px 10px 0;
+            border: 1px solid var(--green); border-left: none;
+        }
+        .schedule-table tr.highlight td:nth-child(2) { color: var(--green); }
+
+        /* ============ ACTIVITIES ============ */
+        .activities-section { padding: 5rem 0; }
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem; max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+        }
+        .activity-card {
+            background: var(--navy-dark);
+            border: 1px solid rgba(92,225,255,0.2);
+            border-radius: 20px; padding: 2rem;
+            transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .activity-card:hover {
+            transform: translateY(-8px); border-color: var(--cyan);
+            box-shadow: 0 20px 60px rgba(92,225,255,0.15);
+        }
+        .activity-card .card-icon {
+            width: 70px; height: 70px;
+            background: linear-gradient(135deg, rgba(92,225,255,0.2), rgba(30,174,118,0.2));
+            border-radius: 16px; display: flex; align-items: center;
+            justify-content: center; font-size: 2rem; margin-bottom: 1.2rem;
+        }
+        .activity-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem; margin-bottom: 0.8rem; color: var(--white);
+        }
+        .activity-card p {
+            color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 1rem;
+        }
+        .activity-card .tag {
+            display: inline-block; padding: 0.3rem 0.8rem;
+            background: rgba(30,174,118,0.2); border: 1px solid var(--green);
+            border-radius: 50px; color: var(--green); font-size: 0.8rem; font-weight: 600;
+        }
+
+        /* ============ PRIZES ============ */
+        .prizes-section { padding: 5rem 0; }
+        .prizes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem; max-width: 1000px; margin: 0 auto; padding: 0 2rem;
+        }
+        .prize-item {
+            text-align: center; padding: 2rem 1rem;
+            background: var(--navy-dark);
+            border: 1px solid rgba(92,225,255,0.15);
+            border-radius: 16px; transition: all 0.3s;
+        }
+        .prize-item:hover {
+            border-color: var(--cyan); transform: translateY(-3px);
+        }
+        .prize-item .prize-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+        .prize-item h4 {
+            font-size: 0.95rem; color: var(--cyan); margin-bottom: 0.3rem;
+        }
+        .prize-item p {
+            font-size: 0.85rem; color: rgba(255,255,255,0.6);
+        }
+
+        /* ============ CTA ============ */
+        .cta-section {
+            padding: 5rem 2rem; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .cta-section::before {
+            content: ''; position: absolute;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(92,225,255,0.1) 0%, transparent 70%);
+            top: -200px; right: -200px; border-radius: 50%;
+        }
+        .cta-section::after {
+            content: ''; position: absolute;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(30,174,118,0.1) 0%, transparent 70%);
+            bottom: -150px; left: -150px; border-radius: 50%;
+        }
+        .cta-content {
+            position: relative; z-index: 1; max-width: 700px; margin: 0 auto;
+        }
+        .cta-content h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.5rem, 3vw, 2.2rem); margin-bottom: 1rem;
+        }
+        .cta-content p {
+            font-size: 1.1rem; color: rgba(255,255,255,0.8);
+            margin-bottom: 2rem; line-height: 1.6;
+        }
+        .cta-links {
+            display: flex; flex-direction: column; gap: 1rem;
+            align-items: center; margin-top: 2rem;
+        }
+        .cta-link {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: var(--cyan); text-decoration: none; font-weight: 600;
+            transition: all 0.3s; padding: 0.6rem 1.5rem;
+            border: 1px solid rgba(92,225,255,0.3); border-radius: 50px;
+        }
+        .cta-link:hover {
+            background: rgba(92,225,255,0.1); border-color: var(--cyan);
+        }
+
+        /* ============ SOCIAL ============ */
+        .social-section {
+            padding: 3rem 0; text-align: center;
+        }
+        .social-links {
+            display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem;
+        }
+        .social-link {
+            width: 50px; height: 50px; background: var(--navy-dark);
+            border: 1px solid rgba(92,225,255,0.3); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--cyan); font-size: 1.3rem; text-decoration: none;
+            transition: all 0.3s;
+        }
+        .social-link:hover {
+            background: var(--cyan); color: var(--navy-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(92,225,255,0.3);
+        }
+
+        /* ============ WEBINAR ============ */
+        .webinar-section { padding: 5rem 0; }
+        .webinar-card {
+            max-width: 800px; margin: 0 auto;
+            background: var(--navy-dark);
+            border: 2px solid var(--cyan);
+            border-radius: 20px; padding: 3rem;
+            position: relative; overflow: hidden;
+            box-shadow: 0 0 40px rgba(92,225,255,0.15);
+        }
+        .webinar-card::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--cyan), var(--green), var(--lila));
+        }
+        .webinar-badge {
+            display: inline-block; padding: 0.4rem 1rem;
+            background: rgba(92,225,255,0.15); border: 1px solid var(--cyan);
+            border-radius: 50px; color: var(--cyan); font-size: 0.75rem;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        .webinar-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem; margin-bottom: 1rem; line-height: 1.3;
+        }
+        .webinar-card h3 .accent { color: var(--cyan); }
+        .webinar-card > p {
+            color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+        .webinar-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem; margin-bottom: 2rem;
+        }
+        .webinar-detail {
+            display: flex; align-items: center; gap: 0.7rem;
+            padding: 0.8rem 1rem;
+            background: rgba(92,225,255,0.05);
+            border-radius: 10px; border: 1px solid rgba(92,225,255,0.1);
+        }
+        .webinar-detail i {
+            color: var(--cyan); font-size: 1.1rem; width: 20px; text-align: center;
+        }
+        .webinar-detail span {
+            font-size: 0.9rem; color: rgba(255,255,255,0.9);
+        }
+        .webinar-highlight {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.5rem 1rem; background: rgba(30,174,118,0.15);
+            border: 1px solid var(--green); border-radius: 8px;
+            color: var(--green); font-size: 0.85rem; font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            background: #0d0d1a; padding: 2rem; text-align: center;
+            color: rgba(255,255,255,0.4); font-size: 0.85rem;
+            border-top: 1px solid rgba(92,225,255,0.1);
+            position: relative; z-index: 1;
+        }
+        footer a { color: var(--cyan); text-decoration: none; }
+
+        /* ============ ANIMATIONS ============ */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal {
+            opacity: 0; transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; position: fixed; top: 0; left: 0;
+                width: 100%; height: 100vh;
+                background: rgba(35,37,92,0.98);
+                flex-direction: column; justify-content: center;
+                align-items: center; gap: 2rem;
+            }
+            .nav-links.open { display: flex; }
+            .hamburger { display: flex; }
+            .guest-card { flex-direction: column; text-align: center; padding: 2rem; }
+            .guest-stats { justify-content: center; }
+            .schedule-table td:first-child { width: auto; font-size: 0.8rem; }
+            .schedule-table td { padding: 0.7rem; font-size: 0.85rem; }
+            .countdown { gap: 1rem; }
+            .countdown-item .number { font-size: 1.8rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .schedule-tab { font-size: 0.75rem; padding: 0.6rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ANIMATED CANVAS BACKGROUND -->
+    <canvas id="animatedBg"></canvas>
+
+    <!-- NAV -->
+    <nav id="navbar">
+        <div class="nav-left">
+            <div class="nav-logo" data-es="Festival de Ciencia" data-en="Science Festival">Festival de Ciencia</div>
+            <button class="lang-toggle" id="langBtn" onclick="toggleLang()">EN</button>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#inicio" data-es="Inicio" data-en="Home">Inicio</a></li>
+            <li><a href="#invitado" data-es="Invitado" data-en="Guest">Invitado</a></li>
+            <li><a href="#cronograma" data-es="Cronograma" data-en="Schedule">Cronograma</a></li>
+            <li><a href="#actividades" data-es="Actividades" data-en="Activities">Actividades</a></li>
+            <li><a href="#registro" data-es="Registro" data-en="Register">Registro</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" onclick="toggleNav()">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <div class="hero-badge" data-es="Segunda Edición" data-en="Second Edition">Segunda Edición</div>
+            <h1>
+                <span class="highlight" data-es="Festival" data-en="Science">Festival</span>
+                <span data-es="de" data-en="">de</span><br>
+                <span data-es="Ciencia" data-en="Festival">Ciencia</span>
+                <span class="highlight" data-es="Bolivia" data-en="Bolivia">Bolivia</span>
+            </h1>
+            <p class="subtitle" data-es="Ciencia, Tecnología, Educación y Exploración Espacial" data-en="Science, Technology, Education and Space Exploration">Ciencia, Tecnología, Educación y Exploración Espacial</p>
+            <div class="date-badge">
+                <i class="fas fa-calendar-alt"></i> <span data-es="8 — 11 de Septiembre 2026" data-en="September 8 — 11, 2026">8 — 11 de Septiembre 2026</span>
+            </div>
+            <p class="location"><i class="fas fa-map-marker-alt"></i> <span data-es="La Paz, Bolivia" data-en="La Paz, Bolivia">La Paz, Bolivia</span></p>
+            <div class="hero-buttons">
+                <a href="https://forms.gle/E8i7j6NyFbm8JSsy6" target="_blank" class="btn-primary">
+                    <i class="fas fa-rocket"></i> <span data-es="Regístrate Gratis" data-en="Register Free">Regístrate Gratis</span>
+                </a>
+                <a href="#cronograma" class="btn-secondary">
+                    <i class="fas fa-calendar"></i> <span data-es="Ver Programa" data-en="View Schedule">Ver Programa</span>
+                </a>
+            </div>
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span class="number" id="days">00</span>
+                    <span class="label" data-es="Días" data-en="Days">Días</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="number" id="hours">00</span>
+                    <span class="label" data-es="Horas" data-en="Hours">Horas</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="number" id="minutes">00</span>
+                    <span class="label" data-es="Min" data-en="Min">Min</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="number" id="seconds">00</span>
+                    <span class="label" data-es="Seg" data-en="Sec">Seg</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about-section" id="about">
+        <h2 class="section-title reveal"><span data-es="¿Qué es el" data-en="What is the">¿Qué es el</span> <span class="accent" data-es="Festival" data-en="Festival">Festival</span>?</h2>
+        <p class="section-subtitle reveal" data-es="Un espacio dedicado a la divulgación científica, la tecnología y la educación" data-en="A space dedicated to scientific outreach, technology and education">Un espacio dedicado a la divulgación científica, la tecnología y la educación</p>
+        <div class="about-grid">
+            <div class="about-card reveal">
+                <div class="icon"><i class="fas fa-atom"></i></div>
+                <h3 data-es="Charlas Científicas" data-en="Scientific Talks">Charlas Científicas</h3>
+                <p data-es="Conferencias sobre tecnología nuclear, exploración espacial, mecánica cuántica y más, impartidas por expertos nacionales e internacionales." data-en="Conferences on nuclear technology, space exploration, quantum mechanics and more, delivered by national and international experts.">Conferencias sobre tecnología nuclear, exploración espacial, mecánica cuántica y más, impartidas por expertos nacionales e internacionales.</p>
+            </div>
+            <div class="about-card reveal">
+                <div class="icon"><i class="fas fa-gamepad"></i></div>
+                <h3 data-es="Juegos Interactivos" data-en="Interactive Games">Juegos Interactivos</h3>
+                <p data-es="Juegos científicos como 'Cosmódromo Oriental', board games, torneos de ajedrez y actividades para todas las edades." data-en="Scientific games like 'Oriental Cosmodrome', board games, chess tournaments and activities for all ages.">Juegos científicos como "Cosmódromo Oriental", board games, torneos de ajedrez y actividades para todas las edades.</p>
+            </div>
+            <div class="about-card reveal">
+                <div class="icon"><i class="fas fa-robot"></i></div>
+                <h3 data-es="Robótica y Hackathon" data-en="Robotics and Hackathon">Robótica y Hackathon</h3>
+                <p data-es="NASCATHON ROBOTOMIC con competencias de robots, demostraciones de robots seguidores de línea y recolectores." data-en="NASCATHON ROBOTOMIC with robot competitions, line-follower and collector robot demonstrations.">NASCATHON ROBOTOMIC con competencias de robots, demostraciones de robots seguidores de línea y recolectores.</p>
+            </div>
+            <div class="about-card reveal">
+                <div class="icon"><i class="fas fa-microscope"></i></div>
+                <h3 data-es="Feria Académica" data-en="Academic Fair">Feria Académica</h3>
+                <p data-es="Feria Científica y Académica Abierta con 12 carpas, laboratorios, talleres y exposiciones interactivas." data-en="Open Scientific and Academic Fair with 12 tents, laboratories, workshops and interactive exhibitions.">Feria Científica y Académica Abierta con 12 carpas, laboratorios, talleres y exposiciones interactivas.</p>
+            </div>
+            <div class="about-card reveal">
+                <div class="icon"><i class="fas fa-camera"></i></div>
+                <h3 data-es="Espacios Fotográficos" data-en="Photo Spaces">Espacios Fotográficos</h3>
+                <p data-es="Espacios para capturar los mejores momentos del festival, incluyendo la noche astronómica en Tiwanaku." data-en="Spaces to capture the best moments of the festival, including the astronomical night in Tiwanaku.">Espacios para capturar los mejores momentos del festival, incluyendo la noche astronómica en Tiwanaku.</p>
+            </div>
+            <div class="about-card reveal">
+                <div class="icon"><i class="fas fa-certificate"></i></div>
+                <h3 data-es="Certificado y Premios" data-en="Certificate and Prizes">Certificado y Premios</h3>
+                <p data-es="Certificado oficial, refrigerios, poleras, stickers, llaveros, gorras y souvenirs para los participantes." data-en="Official certificate, refreshments, t-shirts, stickers, keychains, caps and souvenirs for participants.">Certificado oficial, refrigerios, poleras, stickers, llaveros, gorras y souvenirs para los participantes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GUEST -->
+    <section class="guest-section" id="invitado">
+        <h2 class="section-title reveal"><span data-es="Invitado" data-en="Special">Invitado</span> <span class="accent" data-es="Especial" data-en="Guest">Especial</span></h2>
+        <p class="section-subtitle reveal" data-es="Un cosmonauta real compartirá su experiencia en el espacio" data-en="A real cosmonaut will share his experience in space">Un cosmonauta real compartirá su experiencia en el espacio</p>
+        <div class="guest-card reveal">
+            <div class="guest-avatar"><img src="Sergey_Vladimirovich_Korsakov.jpeg" alt="Sergey Vladimirovich Korsakov"></div>
+            <div class="guest-info">
+                <span class="guest-label" data-es="Cosmonauta Ruso" data-en="Russian Cosmonaut">Cosmonauta Ruso</span>
+                <h2>Sergey Vladimirovich Korsakov</h2>
+                <p class="title" data-es="Roscosmos — Estación Espacial Internacional" data-en="Roscosmos — International Space Station">Roscosmos — Estación Espacial Internacional</p>
+                <p data-es="Cosmonauta de la Agencia Espacial Rusa Roscosmos que permaneció <strong>195 días</strong> en el espacio a bordo de la Estación Espacial Internacional. Compartirá su experiencia en charlas imperdibles durante el festival." data-en="Cosmonaut of the Russian Space Agency Roscosmos who spent <strong>195 days</strong> in space aboard the International Space Station. He will share his experience in unmissable talks during the festival.">Cosmonauta de la Agencia Espacial Rusa Roscosmos que permaneció <strong>195 días</strong> en el espacio a bordo de la Estación Espacial Internacional. Compartirá su experiencia en charlas imperdibles durante el festival.</p>
+                <div class="guest-stats">
+                    <div class="guest-stat">
+                        <span class="num">195</span>
+                        <span class="desc" data-es="Días en el espacio" data-en="Days in space">Días en el espacio</span>
+                    </div>
+                    <div class="guest-stat">
+                        <span class="num">ISS</span>
+                        <span class="desc" data-es="Estación Espacial" data-en="Space Station">Estación Espacial</span>
+                    </div>
+                    <div class="guest-stat">
+                        <span class="num">4</span>
+                        <span class="desc" data-es="Jornadas en el festival" data-en="Days at the festival">Jornadas en el festival</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ORGANIZERS -->
+    <section class="organizers-section">
+        <h2 class="section-title reveal" data-es="Organizadores" data-en="Organizers">Organizadores</h2>
+        <p class="section-subtitle reveal" data-es="Instituciones que hacen posible este evento" data-en="Institutions making this event possible">Instituciones que hacen posible este evento</p>
+        <div class="organizers-grid reveal">
+            <div class="organizer">
+                <div class="org-icon"><img src="Rosatom.jpeg" alt="Rosatom"></div>
+                <div class="org-name">Rosatom</div>
+            </div>
+            <div class="organizer">
+                <div class="org-icon"><img src="UMSA.jpeg" alt="UMSA"></div>
+                <div class="org-name">UMSA</div>
+            </div>
+            <div class="organizer">
+                <div class="org-icon"><img src="Club_Ciencias_Nucleares.jpeg" alt="Club de Ciencias Nucleares"></div>
+                <div class="org-name" data-es="Club de Ciencias Nucleares" data-en="Nuclear Science Club">Club de Ciencias Nucleares</div>
+            </div>
+            <div class="organizer">
+                <div class="org-icon"><img src="Embajada_de_Rusia.jpeg" alt="Embajada de Rusia"></div>
+                <div class="org-name" data-es="Embajada de Rusia" data-en="Embassy of Russia">Embajada de Rusia</div>
+            </div>
+            <div class="organizer">
+                <div class="org-icon"><img src="Ministerio_de_Educacion.jpeg" alt="Ministerio de Educación"></div>
+                <div class="org-name" data-es="Ministerio de Educación" data-en="Ministry of Education">Ministerio de Educación</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WEBINAR -->
+    <section class="webinar-section" id="webinar">
+        <h2 class="section-title reveal"><span data-es="Webinar" data-en="Webinar">Webinar</span> <span class="accent" data-es="Preparatorio" data-en="Preparatory">Preparatorio</span></h2>
+        <p class="section-subtitle reveal" data-es="Prepárate para el festival con este evento online previo" data-en="Get ready for the festival with this previous online event">Prepárate para el festival con este evento online previo</p>
+        <div class="webinar-card reveal">
+            <span class="webinar-badge" data-es="Impact Team 2050" data-en="Impact Team 2050">Impact Team 2050</span>
+            <h3>
+                <span data-es="Webinar Preparatorio — Festival de Ciencias Bolivia" data-en="Preparatory Webinar — Bolivia Science Festival">Webinar Preparatorio — Festival de Ciencias Bolivia</span>
+            </h3>
+            <p data-es="El Impact Team 2050 promueve un webinar preparatorio para el Festival de Ciencias Bolivia, reuniendo a jóvenes, estudiantes, investigadores y personas interesadas en ciencia, tecnología y energía para discutir el papel de las tecnologías nucleares en el desarrollo del país." data-en="Impact Team 2050 promotes a preparatory webinar for the Bolivia Science Festival, bringing together young people, students, researchers and people interested in science, technology and energy to discuss the role of nuclear technologies in the country's development.">El Impact Team 2050 promueve un webinar preparatorio para el Festival de Ciencias Bolivia, reuniendo a jóvenes, estudiantes, investigadores y personas interesadas en ciencia, tecnología y energía para discutir el papel de las tecnologías nucleares en el desarrollo del país.</p>
+            <div class="webinar-highlight">
+                <i class="fas fa-certificate"></i>
+                <span data-es="Certificado digital de participación para los asistentes" data-en="Digital certificate of participation for attendees">Certificado digital de participación para los asistentes</span>
+            </div>
+            <div class="webinar-details">
+                <div class="webinar-detail">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>7 de septiembre de 2026 (lunes)</span>
+                </div>
+                <div class="webinar-detail">
+                    <i class="fas fa-clock"></i>
+                    <span>18:00 — 21:00 h (Bolivia)</span>
+                </div>
+                <div class="webinar-detail">
+                    <i class="fas fa-video"></i>
+                    <span>Online — Google Meet</span>
+                </div>
+            </div>
+            <div class="hero-buttons" style="animation: none;">
+                <a href="https://forms.gle/EZJ6Ns7UmL3jx1ts9" target="_blank" class="btn-primary">
+                    <i class="fas fa-pen"></i> <span data-es="Inscribirme al Webinar" data-en="Register for Webinar">Inscribirme al Webinar</span>
+                </a>
+                <a href="https://www.instagram.com/p/Dc5_v05lHc5/?igsi=MWduaHF3aTExMmdjaw==" target="_blank" class="btn-secondary">
+                    <i class="fab fa-instagram"></i> <span data-es="Ver en Instagram" data-en="View on Instagram">Ver en Instagram</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section class="schedule-section" id="cronograma">
+        <h2 class="section-title reveal"><span data-es="Cronograma" data-en="Full">Cronograma</span> <span class="accent" data-es="Completo" data-en="Schedule">Completo</span></h2>
+        <p class="section-subtitle reveal" data-es="Cuatro jornadas de ciencia, tecnología y exploración" data-en="Four days of science, technology and exploration">Cuatro jornadas de ciencia, tecnología y exploración</p>
+
+        <div class="schedule-tabs">
+            <button class="schedule-tab active" onclick="showDay('day1')">
+                <i class="fas fa-calendar-day"></i> <span data-es="MARTES 08" data-en="TUESDAY 08">MARTES 08</span>
+            </button>
+            <button class="schedule-tab" onclick="showDay('day2')">
+                <i class="fas fa-calendar-day"></i> <span data-es="MIÉRCOLES 09" data-en="WEDNESDAY 09">MIÉRCOLES 09</span>
+            </button>
+            <button class="schedule-tab" onclick="showDay('day3')">
+                <i class="fas fa-calendar-day"></i> <span data-es="JUEVES 10" data-en="THURSDAY 10">JUEVES 10</span>
+            </button>
+            <button class="schedule-tab" onclick="showDay('day4')">
+                <i class="fas fa-calendar-day"></i> <span data-es="VIERNES 11" data-en="FRIDAY 11">VIERNES 11</span>
+            </button>
+        </div>
+
+        <!-- DAY 1 -->
+        <div class="schedule-day active" id="day1">
+            <div class="day-header">
+                <span class="day-number">01</span>
+                <div class="day-details">
+                    <h3 data-es="Martes 8 de Septiembre" data-en="Tuesday, September 8">Martes 8 de Septiembre</h3>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> <span data-es="Auditorio Avelino Siñani — Ministerio de Educación" data-en="Avelino Siñani Auditorium — Ministry of Education">Auditorio Avelino Siñani — Ministerio de Educación</span></p>
+                </div>
+            </div>
+            <table class="schedule-table">
+                <tr><td>14:00 — 14:30</td><td data-es="Registro e inscripción de participantes" data-en="Participant registration">Registro e inscripción de participantes</td><td data-es="Equipo organizador" data-en="Organizing team">Equipo organizador</td></tr>
+                <tr><td>14:30 — 15:00</td><td data-es="Ceremonia de apertura del Festival" data-en="Festival opening ceremony">Ceremonia de apertura del Festival</td><td>Asmik Kosyan, Kevin Job, Brian Ayala, M. Eugenia García, René Soria, D. Verchenko, R. Sanjinés</td></tr>
+                <tr class="highlight"><td>15:00 — 16:10</td><td data-es="🚀 'Esto es simplemente el espacio' — Tecnología nuclear en el universo" data-en="🚀 'This is simply space' — Nuclear technology in the universe">🚀 "Esto es simplemente el espacio" — Tecnología nuclear en el universo</td><td data-es="Cosmonauta Sergey V. Korsakov" data-en="Cosmonaut Sergey V. Korsakov">Cosmonauta Sergey V. Korsakov</td></tr>
+                <tr><td>16:10 — 16:40</td><td data-es="Los horizontes actuales del desarrollo de la tecnología nuclear en Sudamérica" data-en="Current horizons of nuclear technology development in South America">Los horizontes actuales del desarrollo de la tecnología nuclear en Sudamérica</td><td>Asmik Kosyan / ABEN</td></tr>
+                <tr><td>16:40 — 17:10</td><td>☕ Coffee-break</td><td>—</td></tr>
+                <tr><td>17:10 — 17:40</td><td data-es="'¿Qué es un átomo? La ciencia está explicada'" data-en="'What is an atom? Science explained'">"¿Qué es un átomo? La ciencia está explicada"</td><td>Ronald Winkelmann</td></tr>
+                <tr><td>17:40 — 18:10</td><td data-es="Juego científico 'Cosmódromo Oriental'" data-en="Scientific game 'Oriental Cosmodrome'">Juego científico "Cosmódromo Oriental"</td><td data-es="Interacción en equipos" data-en="Team interaction">Interacción en equipos</td></tr>
+                <tr><td>18:10 — 18:40</td><td data-es="Exploración espacial y Ciencias Nucleares" data-en="Space exploration and Nuclear Sciences">Exploración espacial y Ciencias Nucleares</td><td>Mauricio Ayllon</td></tr>
+                <tr><td>18:40 — 19:10</td><td data-es="Computadora basada en mecánica cuántica" data-en="Quantum mechanics based computer">Computadora basada en mecánica cuántica</td><td>Carla Mariela Quispe Flores</td></tr>
+                <tr><td>19:10 — 19:30</td><td data-es="Premiación a equipos ganadores" data-en="Awards to winning teams">Premiación a equipos ganadores</td><td>—</td></tr>
+            </table>
+        </div>
+
+        <!-- DAY 2 -->
+        <div class="schedule-day" id="day2">
+            <div class="day-header">
+                <span class="day-number">02</span>
+                <div class="day-details">
+                    <h3 data-es="Miércoles 9 de Septiembre" data-en="Wednesday, September 9">Miércoles 9 de Septiembre</h3>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> <span data-es="Paraninfo Monoblock — Universidad Mayor de San Andrés (UMSA)" data-en="Monoblock Auditorium — Universidad Mayor de San Andrés (UMSA)">Paraninfo Monoblock — Universidad Mayor de San Andrés (UMSA)</span></p>
+                </div>
+            </div>
+            <table class="schedule-table">
+                <tr><td>14:00 — 14:30</td><td data-es="Registro e inscripción de participantes" data-en="Participant registration">Registro e inscripción de participantes</td><td data-es="Equipo organizador" data-en="Organizing team">Equipo organizador</td></tr>
+                <tr><td>14:30 — 15:00</td><td data-es="Ceremonia de apertura del Festival" data-en="Festival opening ceremony">Ceremonia de apertura del Festival</td><td data-es="Autoridades e invitados especiales" data-en="Authorities and special guests">Autoridades e invitados especiales</td></tr>
+                <tr><td>15:00 — 15:30</td><td data-es="Becas y estudios en Rusia" data-en="Scholarships and studies in Russia">Becas y estudios en Rusia</td><td data-es="Embajada de Rusia" data-en="Embassy of Russia">Embajada de Rusia</td></tr>
+                <tr class="highlight"><td>15:30 — 16:40</td><td data-es="🚀 'Esto es simplemente el espacio'" data-en="🚀 'This is simply space'">🚀 "Esto es simplemente el espacio"</td><td data-es="Cosmonauta Sergey V. Korsakov" data-en="Cosmonaut Sergey V. Korsakov">Cosmonauta Sergey V. Korsakov</td></tr>
+                <tr><td>16:40 — 17:10</td><td data-es="Efectos positivos de la radiación en los alimentos" data-en="Positive effects of radiation on food">Efectos positivos de la radiación en los alimentos</td><td>Cristian Condori</td></tr>
+                <tr><td>17:10 — 17:40</td><td data-es="Reactor de investigación" data-en="Research reactor">Reactor de investigación</td><td>Mikhail Obukhov (Rosatom)</td></tr>
+                <tr><td>17:40 — 18:10</td><td>☕ Coffee-break</td><td>—</td></tr>
+                <tr><td>18:10 — 18:40</td><td data-es="Seguridad nuclear, tratamiento de desechos radiológicos" data-en="Nuclear safety, radioactive waste treatment">Seguridad nuclear, tratamiento de desechos radiológicos</td><td>Julio dek Oliveira</td></tr>
+                <tr><td>18:40 — 19:20</td><td data-es="Conferencias Académicas" data-en="Academic Conferences">Conferencias Académicas</td><td data-es="Ponentes Universitarios" data-en="University Speakers">Ponentes Universitarios</td></tr>
+            </table>
+        </div>
+
+        <!-- DAY 3 -->
+        <div class="schedule-day" id="day3">
+            <div class="day-header">
+                <span class="day-number">03</span>
+                <div class="day-details">
+                    <h3 data-es="Jueves 10 de Septiembre" data-en="Thursday, September 10">Jueves 10 de Septiembre</h3>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> <span data-es="UMSA y Tiwanaku" data-en="UMSA and Tiwanaku">UMSA y Tiwanaku</span></p>
+                </div>
+            </div>
+            <table class="schedule-table">
+                <tr><td>14:00 — 14:30</td><td data-es="Registro de participantes" data-en="Participant registration">Registro de participantes</td><td data-es="Equipo organizador" data-en="Organizing team">Equipo organizador</td></tr>
+                <tr><td>14:30 — 15:10</td><td data-es="'Los Detectores y su desarrollo tecnológico'" data-en="'Detectors and their technological development'">"Los Detectores y su desarrollo tecnológico"</td><td>Eduardo Gonzalo</td></tr>
+                <tr><td>15:10 — 16:40</td><td data-es="Ciclo del combustible nuclear" data-en="Nuclear fuel cycle">Ciclo del combustible nuclear</td><td>Roman Vasilyevich Fomin</td></tr>
+                <tr><td>16:40 — 17:30</td><td data-es="Instrumentación para control de radiación" data-en="Instrumentation for radiation control">Instrumentación para control de radiación</td><td>Tatiana Vadimovna Melnikova</td></tr>
+                <tr><td>17:30 — 18:00</td><td data-es="Almuerzo (Se entregará refrigerio al salir)" data-en="Lunch (Refreshment given on departure)">Almuerzo (Se entregará refrigerio al salir)</td><td>—</td></tr>
+                <tr><td>17:30 — 19:30</td><td data-es="Viaje a Tiwanaku (Traslado de 2 horas)" data-en="Trip to Tiwanaku (2-hour transfer)">Viaje a Tiwanaku (Traslado de 2 horas)</td><td data-es="Exclusivo 100 personas" data-en="Exclusive 100 people">Exclusivo 100 personas</td></tr>
+                <tr><td>19:30 — 20:00</td><td data-es="Planificación de astrofotografía" data-en="Astrophotography planning">Planificación de astrofotografía</td><td>Kevin Job</td></tr>
+                <tr><td>20:00 — 20:20</td><td data-es="Refrigerio extra" data-en="Extra refreshment">Refrigerio extra</td><td>—</td></tr>
+                <tr class="highlight"><td>20:20 — 22:00</td><td data-es="🌙 'Más cerca de las estrellas' — Noche astronómica" data-en="🌙 'Closer to the stars' — Astronomical night">🌙 "Más cerca de las estrellas" — Noche astronómica</td><td data-es="Sergey V. Korsakov" data-en="Sergey V. Korsakov">Sergey V. Korsakov</td></tr>
+                <tr><td>22:00 — 00:00</td><td data-es="Retorno a La Paz" data-en="Return to La Paz">Retorno a La Paz</td><td data-es="Transporte contratado" data-en="Chartered transport">Transporte contratado</td></tr>
+            </table>
+        </div>
+
+        <!-- DAY 4 -->
+        <div class="schedule-day" id="day4">
+            <div class="day-header">
+                <span class="day-number">04</span>
+                <div class="day-details">
+                    <h3 data-es="Viernes 11 de Septiembre" data-en="Friday, September 11">Viernes 11 de Septiembre</h3>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> <span data-es="Atrio y Paraninfo de la UMSA" data-en="Atrium and Auditorium of UMSA">Atrio y Paraninfo de la UMSA</span></p>
+                </div>
+            </div>
+            <table class="schedule-table">
+                <tr class="highlight"><td>09:00 — 13:00</td><td data-es="🎪 Feria Científica y Académica Abierta (12 carpas)" data-en="🎪 Open Scientific and Academic Fair (12 tents)">🎪 Feria Científica y Académica Abierta (12 carpas)</td><td data-es="Expositores varios — Atrio" data-en="Various exhibitors — Atrium">Expositores varios — Atrio</td></tr>
+                <tr><td>09:30 — 10:30</td><td data-es="♟️ Gran final del torneo de ajedrez" data-en="♟️ Chess tournament grand final">♟️ Gran final del torneo de ajedrez</td><td data-es="Participantes clasificados" data-en="Qualified participants">Participantes clasificados</td></tr>
+                <tr class="highlight"><td>09:00 — 14:00</td><td data-es="🤖 HACKATHON ROBOTOMIC — Competencias de robots + Expo Robotomic" data-en="🤖 HACKATHON ROBOTOMIC — Robot competitions + Expo Robotomic">🤖 HACKATHON ROBOTOMIC — Competencias de robots + Expo Robotomic</td><td>María Belén</td></tr>
+                <tr><td>11:30 — 13:00</td><td data-es="Board game 'Lord of Nuclear Cycles'" data-en="Board game 'Lord of Nuclear Cycles'">Board game "Lord of Nuclear Cycles"</td><td>Tatiana Vadimovna Melnikova</td></tr>
+                <tr><td>14:00 — 14:30</td><td data-es="Salud: medicina avanzada para proteger la salud" data-en="Health: advanced medicine to protect health">Salud: medicina avanzada para proteger la salud</td><td>Wanda Natalia Camacho</td></tr>
+                <tr><td>14:30 — 15:00</td><td data-es="Sin secretos: tecnologías nucleares en la historia" data-en="No secrets: nuclear technologies in history">Sin secretos: tecnologías nucleares en la historia</td><td>Brian Ayala</td></tr>
+                <tr><td>15:00 — 15:40</td><td data-es="Taller 'Uso de detectores en Bolivia'" data-en="Workshop 'Use of detectors in Bolivia'">Taller "Uso de detectores en Bolivia"</td><td>Christian Romero</td></tr>
+                <tr><td>15:40 — 16:30</td><td data-es="Formación: reacción en cadena + Átomo en el hielo" data-en="Training: chain reaction + Atom on ice">Formación: reacción en cadena + Átomo en el hielo</td><td>Kevin, Brian y Asmik</td></tr>
+                <tr class="highlight"><td>16:30 — 17:30</td><td data-es="🏆 Ceremonia de clausura del festival y premiación" data-en="🏆 Festival closing ceremony and awards">🏆 Ceremonia de clausura del festival y premiación</td><td data-es="Comité Organizador" data-en="Organizing Committee">Comité Organizador</td></tr>
+            </table>
+        </div>
+    </section>
+
+    <!-- ACTIVITIES -->
+    <section class="activities-section" id="actividades">
+        <h2 class="section-title reveal"><span data-es="Actividades" data-en="Featured">Actividades</span> <span class="accent" data-es="Destacadas" data-en="Activities">Destacadas</span></h2>
+        <p class="section-subtitle reveal" data-es="Experiencias únicas para todas las edades" data-en="Unique experiences for all ages">Experiencias únicas para todas las edades</p>
+        <div class="activities-grid">
+            <div class="activity-card reveal">
+                <div class="card-icon">🤖</div>
+                <h3>NASCATHON ROBOTOMIC</h3>
+                <p data-es="Competencia de robots donde los equipos demostrarán sus habilidades en desarrollo tecnológico. Incluye demostraciones de robots seguidores de línea y robots recolectores." data-en="Robot competition where teams will demonstrate their skills in technological development. Includes line-follower and collector robot demonstrations.">Competencia de robots donde los equipos demostrarán sus habilidades en desarrollo tecnológico. Incluye demostraciones de robots seguidores de línea y robots recolectores.</p>
+                <span class="tag" data-es="Viernes 11 • 09:00 - 14:00" data-en="Friday 11 • 09:00 - 14:00">Viernes 11 • 09:00 - 14:00</span>
+            </div>
+            <div class="activity-card reveal">
+                <div class="card-icon">♟️</div>
+                <h3 data-es="Torneo de Ajedrez" data-en="Chess Tournament">Torneo de Ajedrez</h3>
+                <p data-es="Demuestra tu estrategia y razonamiento en el torneo oficial del Festival. Premios para los primeros lugares. Inscripción gratuita con cupos limitados." data-en="Show your strategy and reasoning in the official Festival tournament. Prizes for the top places. Free registration with limited spots.">Demuestra tu estrategia y razonamiento en el torneo oficial del Festival. Premios para los primeros lugares. Inscripción gratuita con cupos limitados.</p>
+                <span class="tag" data-es="Viernes 11 • 09:30 - 10:30" data-en="Friday 11 • 09:30 - 10:30">Viernes 11 • 09:30 - 10:30</span>
+            </div>
+            <div class="activity-card reveal">
+                <div class="card-icon">🌙</div>
+                <h3 data-es="Noche Astronómica" data-en="Astronomical Night">Noche Astronómica</h3>
+                <p data-es="'Más cerca de las estrellas' en Tiwanaku junto al cosmonauta Sergey Korsakov. Planificación de astrofotografía y observación del cielo." data-en="'Closer to the stars' in Tiwanaku with cosmonaut Sergey Korsakov. Astrophotography planning and sky observation.">'Más cerca de las estrellas' en Tiwanaku junto al cosmonauta Sergey Korsakov. Planificación de astrofotografía y observación del cielo.</p>
+                <span class="tag" data-es="Jueves 10 • 20:20 - 22:00" data-en="Thursday 10 • 20:20 - 22:00">Jueves 10 • 20:20 - 22:00</span>
+            </div>
+            <div class="activity-card reveal">
+                <div class="card-icon">🔬</div>
+                <h3 data-es="Feria Científica" data-en="Science Fair">Feria Científica</h3>
+                <p data-es="12 carpas con exposiciones interactivas, laboratorios, talleres y proyectos académicos. Acceso abierto para todo el público." data-en="12 tents with interactive exhibitions, laboratories, workshops and academic projects. Open access for the general public.">12 carpas con exposiciones interactivas, laboratorios, talleres y proyectos académicos. Acceso abierto para todo el público.</p>
+                <span class="tag" data-es="Viernes 11 • 09:00 - 13:00" data-en="Friday 11 • 09:00 - 13:00">Viernes 11 • 09:00 - 13:00</span>
+            </div>
+            <div class="activity-card reveal">
+                <div class="card-icon">⚛️</div>
+                <h3>Board Game Nuclear</h3>
+                <p data-es="'Lord of Nuclear Cycles' — Un juego de mesa para aprender sobre el ciclo del combustible nuclear de forma divertida e interactiva." data-en="'Lord of Nuclear Cycles' — A board game to learn about the nuclear fuel cycle in a fun and interactive way.">'Lord of Nuclear Cycles' — Un juego de mesa para aprender sobre el ciclo del combustible nuclear de forma divertida e interactiva.</p>
+                <span class="tag" data-es="Viernes 11 • 11:30 - 13:00" data-en="Friday 11 • 11:30 - 13:00">Viernes 11 • 11:30 - 13:00</span>
+            </div>
+            <div class="activity-card reveal">
+                <div class="card-icon">🎓</div>
+                <h3 data-es="Becas y Estudios en Rusia" data-en="Scholarships and Studies in Russia">Becas y Estudios en Rusia</h3>
+                <p data-es="Información sobre oportunidades de becas y estudios en Rusia, a cargo de la Embajada de Rusia en Bolivia." data-en="Information on scholarship and study opportunities in Russia, by the Embassy of Russia in Bolivia.">Información sobre oportunidades de becas y estudios en Rusia, a cargo de la Embajada de Rusia en Bolivia.</p>
+                <span class="tag" data-es="Miércoles 9 • 15:00 - 15:30" data-en="Wednesday 9 • 15:00 - 15:30">Miércoles 9 • 15:00 - 15:30</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRIZES -->
+    <section class="prizes-section">
+        <h2 class="section-title reveal"><span data-es="Premios y" data-en="Prizes and">Premios y</span> <span class="accent" data-es="Beneficios" data-en="Benefits">Beneficios</span></h2>
+        <p class="section-subtitle reveal" data-es="Todo 100% GRATIS para los participantes" data-en="Everything 100% FREE for participants">Todo 100% GRATIS para los participantes</p>
+        <div class="prizes-grid">
+            <div class="prize-item reveal"><div class="prize-icon">🏆</div><h4 data-es="Certificado Oficial" data-en="Official Certificate">Certificado Oficial</h4><p data-es="Certificado de participación del festival" data-en="Festival participation certificate">Certificado de participación del festival</p></div>
+            <div class="prize-item reveal"><div class="prize-icon">👕</div><h4 data-es="Poleras" data-en="T-Shirts">Poleras</h4><p data-es="Poleras exclusivas del evento" data-en="Exclusive event t-shirts">Poleras exclusivas del evento</p></div>
+            <div class="prize-item reveal"><div class="prize-icon">🎨</div><h4>Stickers</h4><p data-es="Stickers decorativos del festival" data-en="Decorative festival stickers">Stickers decorativos del festival</p></div>
+            <div class="prize-item reveal"><div class="prize-icon">🔑</div><h4 data-es="Llaveros" data-en="Keychains">Llaveros</h4><p data-es="Souvenirs conmemorativos" data-en="Commemorative souvenirs">Souvenirs conmemorativos</p></div>
+            <div class="prize-item reveal"><div class="prize-icon">🧢</div><h4 data-es="Gorras" data-en="Caps">Gorras</h4><p data-es="Gorras exclusivas del evento" data-en="Exclusive event caps">Gorras exclusivas del evento</p></div>
+            <div class="prize-item reveal"><div class="prize-icon">🍽️</div><h4 data-es="Refrigerios" data-en="Refreshments">Refrigerios</h4><p data-es="Comidas y refrigerios incluidos" data-en="Meals and refreshments included">Comidas y refrigerios incluidos</p></div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="registro">
+        <div class="cta-content reveal">
+            <h2><span data-es="¿Listo para vivir la" data-en="Ready to experience">¿Listo para vivir la</span> <span style="color: var(--cyan);" data-es="ciencia" data-en="science?">ciencia</span>?</h2>
+            <p data-es="Participación gratuita. Los cupos son limitados, ¡no pierdas esta oportunidad! Regístrate ahora y sé parte de cuatro jornadas dedicadas a la ciencia, la tecnología, la educación y la exploración espacial." data-en="Free participation. Spots are limited, don't miss this opportunity! Register now and be part of four days dedicated to science, technology, education and space exploration.">Participación gratuita. Los cupos son limitados, ¡no pierdas esta oportunidad! Regístrate ahora y sé parte de cuatro jornadas dedicadas a la ciencia, la tecnología, la educación y la exploración espacial.</p>
+            <div class="hero-buttons">
+                <a href="https://forms.gle/E8i7j6NyFbm8JSsy6" target="_blank" class="btn-primary">
+                    <i class="fas fa-pen"></i> <span data-es="Inscribirme Ahora" data-en="Register Now">Inscribirme Ahora</span>
+                </a>
+                <a href="https://chat.whatsapp.com/LRdAmiqqUCP08J5sp4gBhp" target="_blank" class="btn-secondary">
+                    <i class="fab fa-whatsapp"></i> <span data-es="Grupo WhatsApp" data-en="WhatsApp Group">Grupo WhatsApp</span>
+                </a>
+            </div>
+            <div class="cta-links">
+                <a href="https://chat.whatsapp.com/KCGQMcLAolcDEbG5VldxS6" target="_blank" class="cta-link">
+                    <i class="fab fa-whatsapp"></i> <span data-es="WhatsApp Hackathon ROBOTOMIC" data-en="WhatsApp Hackathon ROBOTOMIC">WhatsApp Hackathon ROBOTOMIC</span>
+                </a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSe28QJfVdP0_jPzkFAHjUy29CIlvy-fpIdbxX3w-glLBKwAog/viewform" target="_blank" class="cta-link">
+                    <i class="fas fa-chess"></i> <span data-es="Inscripción Torneo Ajedrez" data-en="Chess Tournament Registration">Inscripción Torneo Ajedrez</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL -->
+    <section class="social-section">
+        <h2 class="section-title reveal" style="font-size: 1.3rem;"><span data-es="Síguenos en" data-en="Follow us on">Síguenos en</span> <span class="accent" data-es="Redes Sociales" data-en="Social Media">Redes Sociales</span></h2>
+        <div class="social-links">
+            <a href="https://www.instagram.com/p/Dc01wARR-wk/?igsi=MnZhMW1zYXFhODlx" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://chat.whatsapp.com/LRdAmiqqUCP08J5sp4gBhp" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://forms.gle/E8i7j6NyFbm8JSsy6" target="_blank" class="social-link"><i class="fas fa-pen"></i></a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Festival de Ciencia Bolivia — Rosatom • UMSA • Club de Ciencias Nucleares</p>
+        <p style="margin-top: 0.5rem;"><span data-es="La Paz, Bolivia • Del 8 al 11 de septiembre" data-en="La Paz, Bolivia • September 8 to 11">La Paz, Bolivia • Del 8 al 11 de septiembre</span></p>
+    </footer>
+
+    <script>
+        // ============ ANIMATED CANVAS BACKGROUND ============
+        const canvas = document.getElementById('animatedBg');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        let scrollFactor = 0;
+        window.addEventListener('scroll', () => {
+            const maxScroll = document.body.scrollHeight - window.innerHeight;
+            scrollFactor = Math.min(window.scrollY / (maxScroll * 0.25), 1);
+        });
+
+        // SPACE particles (hero) — stars, nebula glow
+        const stars = [];
+        for (let i = 0; i < 150; i++) {
+            stars.push({
+                x: Math.random() * 3000,
+                y: Math.random() * 2000,
+                size: Math.random() * 2.5 + 0.5,
+                speed: Math.random() * 0.3 + 0.05,
+                brightness: Math.random()
+            });
+        }
+
+        // TECH circuit nodes (scroll-down)
+        const circuits = [];
+        for (let i = 0; i < 40; i++) {
+            circuits.push({
+                x: Math.random() * 2000,
+                y: Math.random() * 2000,
+                size: Math.random() * 4 + 2,
+                connections: []
+            });
+        }
+        // connect nearby circuit nodes
+        for (let i = 0; i < circuits.length; i++) {
+            for (let j = i + 1; j < circuits.length; j++) {
+                const dx = circuits[i].x - circuits[j].x;
+                const dy = circuits[i].y - circuits[j].y;
+                if (Math.sqrt(dx*dx + dy*dy) < 250) {
+                    circuits[i].connections.push(j);
+                }
+            }
+        }
+
+        // Shooting stars
+        let shootingStars = [];
+        function spawnShootingStar() {
+            shootingStars.push({
+                x: Math.random() * canvas.width,
+                y: 0,
+                len: Math.random() * 80 + 40,
+                speed: Math.random() * 8 + 6,
+                angle: Math.PI / 4 + Math.random() * 0.3,
+                life: 1
+            });
+        }
+
+        function animateBg() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const fade = 1 - scrollFactor;
+
+            // Layer 1: Deep space gradient (fades out as you scroll)
+            if (fade > 0) {
+                ctx.save();
+                ctx.globalAlpha = fade;
+                const spaceGrad = ctx.createRadialGradient(
+                    canvas.width * 0.3, canvas.height * 0.4, 0,
+                    canvas.width * 0.3, canvas.height * 0.4, canvas.width * 0.7
+                );
+                spaceGrad.addColorStop(0, 'rgba(49, 27, 83, 0.8)');
+                spaceGrad.addColorStop(0.5, 'rgba(26, 14, 46, 0.6)');
+                spaceGrad.addColorStop(1, 'rgba(13, 13, 26, 0.3)');
+                ctx.fillStyle = spaceGrad;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Nebula glow
+                const nebula1 = ctx.createRadialGradient(
+                    canvas.width * 0.15, canvas.height * 0.3, 0,
+                    canvas.width * 0.15, canvas.height * 0.3, 250
+                );
+                nebula1.addColorStop(0, 'rgba(92, 225, 255, 0.12)');
+                nebula1.addColorStop(1, 'transparent');
+                ctx.fillStyle = nebula1;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                const nebula2 = ctx.createRadialGradient(
+                    canvas.width * 0.85, canvas.height * 0.6, 0,
+                    canvas.width * 0.85, canvas.height * 0.6, 200
+                );
+                nebula2.addColorStop(0, 'rgba(147, 130, 212, 0.1)');
+                nebula2.addColorStop(1, 'transparent');
+                ctx.fillStyle = nebula2;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.restore();
+            }
+
+            // Layer 2: Stars (space theme — fade out as scroll)
+            if (fade > 0.05) {
+                ctx.save();
+                stars.forEach(star => {
+                    const twinkle = 0.5 + Math.sin(Date.now() * 0.002 * star.speed + star.brightness * 10) * 0.5;
+                    ctx.globalAlpha = fade * twinkle * 0.9;
+                    ctx.fillStyle = star.size > 2 ? '#5CE1FF' : '#FFFFFF';
+                    ctx.beginPath();
+                    ctx.arc(star.x % canvas.width, star.y % canvas.height, star.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    // glow
+                    if (star.size > 1.5) {
+                        ctx.globalAlpha = fade * twinkle * 0.15;
+                        ctx.beginPath();
+                        ctx.arc(star.x % canvas.width, star.y % canvas.height, star.size * 4, 0, Math.PI * 2);
+                        const sg = ctx.createRadialGradient(
+                            star.x % canvas.width, star.y % canvas.height, 0,
+                            star.x % canvas.width, star.y % canvas.height, star.size * 4
+                        );
+                        sg.addColorStop(0, 'rgba(92, 225, 255, 0.4)');
+                        sg.addColorStop(1, 'transparent');
+                        ctx.fillStyle = sg;
+                        ctx.fill();
+                    }
+                });
+                ctx.restore();
+            }
+
+            // Layer 3: Shooting stars (space — only at top)
+            if (fade > 0.3) {
+                if (Math.random() < 0.008) spawnShootingStar();
+                shootingStars = shootingStars.filter(s => {
+                    s.x += Math.cos(s.angle) * s.speed;
+                    s.y += Math.sin(s.angle) * s.speed;
+                    s.life -= 0.015;
+                    if (s.life <= 0) return false;
+                    ctx.save();
+                    ctx.globalAlpha = fade * s.life;
+                    ctx.strokeStyle = '#5CE1FF';
+                    ctx.lineWidth = 2;
+                    ctx.shadowColor = '#5CE1FF';
+                    ctx.shadowBlur = 10;
+                    ctx.beginPath();
+                    ctx.moveTo(s.x, s.y);
+                    ctx.lineTo(s.x - Math.cos(s.angle) * s.len, s.y - Math.sin(s.angle) * s.len);
+                    ctx.stroke();
+                    ctx.restore();
+                    return true;
+                });
+            }
+
+            // Layer 4: Tech circuit grid (fades IN as you scroll)
+            if (scrollFactor > 0.05) {
+                ctx.save();
+                ctx.globalAlpha = scrollFactor * 0.5;
+
+                // Draw connections
+                ctx.strokeStyle = '#5CE1FF';
+                ctx.lineWidth = 0.8;
+                circuits.forEach((node, i) => {
+                    node.connections.forEach(j => {
+                        const other = circuits[j];
+                        ctx.globalAlpha = scrollFactor * 0.25;
+                        ctx.beginPath();
+                        ctx.moveTo(node.x % canvas.width, node.y % canvas.height);
+                        ctx.lineTo(other.x % canvas.width, other.y % canvas.height);
+                        ctx.stroke();
+                    });
+                });
+
+                // Draw nodes
+                circuits.forEach(node => {
+                    ctx.globalAlpha = scrollFactor * 0.6;
+                    ctx.fillStyle = '#5CE1FF';
+                    ctx.beginPath();
+                    ctx.arc(node.x % canvas.width, node.y % canvas.height, node.size, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // node glow
+                    ctx.globalAlpha = scrollFactor * 0.15;
+                    const ng = ctx.createRadialGradient(
+                        node.x % canvas.width, node.y % canvas.height, 0,
+                        node.x % canvas.width, node.y % canvas.height, node.size * 5
+                    );
+                    ng.addColorStop(0, '#5CE1FF');
+                    ng.addColorStop(1, 'transparent');
+                    ctx.fillStyle = ng;
+                    ctx.beginPath();
+                    ctx.arc(node.x % canvas.width, node.y % canvas.height, node.size * 5, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                // Hexagonal grid pattern
+                ctx.globalAlpha = scrollFactor * 0.06;
+                ctx.strokeStyle = '#9382D4';
+                ctx.lineWidth = 0.5;
+                const hexSize = 60;
+                const w = hexSize * Math.sqrt(3);
+                for (let row = 0; row < canvas.height / (hexSize * 1.5) + 1; row++) {
+                    for (let col = 0; col < canvas.width / w + 1; col++) {
+                        const x = col * w + (row % 2 ? w / 2 : 0);
+                        const y = row * hexSize * 1.5;
+                        drawHex(ctx, x, y, hexSize * 0.8);
+                    }
+                }
+
+                ctx.restore();
+            }
+
+            requestAnimationFrame(animateBg);
+        }
+
+        function drawHex(ctx, cx, cy, r) {
+            ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+                const angle = (Math.PI / 3) * i - Math.PI / 6;
+                const x = cx + r * Math.cos(angle);
+                const y = cy + r * Math.sin(angle);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.stroke();
+        }
+
+        animateBg();
+
+        // ============ NAV SCROLL ============
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 80);
+        });
+
+        // ============ HAMBURGER ============
+        function toggleNav() {
+            document.getElementById('navLinks').classList.toggle('open');
+        }
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+        });
+
+        // ============ SCHEDULE TABS ============
+        function showDay(dayId) {
+            document.querySelectorAll('.schedule-day').forEach(d => d.classList.remove('active'));
+            document.querySelectorAll('.schedule-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(dayId).classList.add('active');
+            event.target.closest('.schedule-tab').classList.add('active');
+        }
+
+        // ============ COUNTDOWN ============
+        function updateCountdown() {
+            const eventDate = new Date('2026-09-08T14:00:00-04:00');
+            const diff = eventDate - new Date();
+            if (diff <= 0) {
+                ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '00');
+                return;
+            }
+            document.getElementById('days').textContent = String(Math.floor(diff / 86400000)).padStart(2, '0');
+            document.getElementById('hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // ============ REVEAL ON SCROLL ============
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // ============ SMOOTH SCROLL ============
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // ============ LANGUAGE TOGGLE ============
+        let currentLang = 'es';
+        function toggleLang() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            document.getElementById('langBtn').textContent = currentLang === 'es' ? 'EN' : 'ES';
+            document.querySelectorAll('[data-es]').forEach(el => {
+                const key = currentLang === 'es' ? 'data-es' : 'data-en';
+                el.innerHTML = el.getAttribute(key);
+            });
+        }
+    </script>
+</body>
+</html>
