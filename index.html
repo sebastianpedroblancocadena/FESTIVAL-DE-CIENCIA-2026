@@ -274,24 +274,36 @@
         .organizers-section { padding: 4rem 0; }
         .organizers-grid {
             display: flex; justify-content: center; align-items: center;
-            gap: 3rem; flex-wrap: wrap; max-width: 1000px;
+            gap: 4rem; flex-wrap: wrap; max-width: 1100px;
             margin: 0 auto; padding: 0 2rem;
         }
         .organizer { text-align: center; padding: 1.5rem; }
         .organizer .org-icon {
-            width: 90px; height: 90px; background: var(--navy-dark);
-            border: 2px solid rgba(92,225,255,0.3); border-radius: 50%;
+            width: 140px; height: 70px; background: transparent;
+            border: none; border-radius: 0;
             display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 0.8rem; overflow: hidden;
+            margin: 0 auto 0.8rem; overflow: visible;
             transition: all 0.3s;
         }
         .organizer:hover .org-icon {
-            border-color: var(--cyan);
-            box-shadow: 0 0 20px rgba(92,225,255,0.3);
-            transform: scale(1.05);
+            transform: scale(1.08);
+            filter: brightness(1.3);
         }
         .organizer .org-icon img {
-            width: 100%; height: 100%; object-fit: cover;
+            width: 100%; height: 100%; object-fit: contain;
+        }
+        .organizer .org-icon img.remove-bg-dark {
+            mix-blend-mode: screen;
+            filter: brightness(1.4) contrast(1.2);
+        }
+        .organizer .org-icon img.remove-bg-light {
+            mix-blend-mode: multiply;
+            filter: brightness(1.1);
+        }
+        .organizer .org-icon img.rounded-border {
+            border-radius: 50%;
+            padding: 5px;
+            background: white;
         }
         .organizer .org-name { font-size: 0.9rem; font-weight: 600; }
 
@@ -598,7 +610,7 @@
     <!-- NAV -->
     <nav id="navbar">
         <div class="nav-left">
-            <div class="nav-logo" data-es="Festival de Ciencia" data-en="Science Festival">Festival de Ciencia</div>
+            <div class="nav-logo" data-es="Club de Ciencias Nucleares" data-en="Nuclear Science Club">Club de Ciencias Nucleares</div>
             <button class="lang-toggle" id="langBtn" onclick="toggleLang()">EN</button>
         </div>
         <ul class="nav-links" id="navLinks">
@@ -675,7 +687,7 @@
             <div class="about-card reveal">
                 <div class="icon"><i class="fas fa-robot"></i></div>
                 <h3 data-es="Robótica y Hackathon" data-en="Robotics and Hackathon">Robótica y Hackathon</h3>
-                <p data-es="NASCATHON ROBOTOMIC con competencias de robots, demostraciones de robots seguidores de línea y recolectores." data-en="NASCATHON ROBOTOMIC with robot competitions, line-follower and collector robot demonstrations.">NASCATHON ROBOTOMIC con competencias de robots, demostraciones de robots seguidores de línea y recolectores.</p>
+                <p data-es="Torneo de Robótica con competencias de robots, demostraciones y batallas ante el público." data-en="Robotics tournament with robot competitions, demonstrations and battles before the public.">Torneo de Robótica con competencias de robots, demostraciones y batallas ante el público.</p>
             </div>
             <div class="about-card reveal">
                 <div class="icon"><i class="fas fa-microscope"></i></div>
@@ -724,30 +736,30 @@
         </div>
     </section>
 
-    <!-- ORGANIZERS -->
+    <!-- AUSPICIADORES -->
     <section class="organizers-section">
-        <h2 class="section-title reveal" data-es="Organizadores" data-en="Organizers">Organizadores</h2>
+        <h2 class="section-title reveal" data-es="Auspiciadores" data-en="Sponsors">Auspiciadores</h2>
         <p class="section-subtitle reveal" data-es="Instituciones que hacen posible este evento" data-en="Institutions making this event possible">Instituciones que hacen posible este evento</p>
         <div class="organizers-grid reveal">
             <div class="organizer">
-                <div class="org-icon"><img src="Rosatom.jpeg" alt="Rosatom"></div>
-                <div class="org-name">Rosatom</div>
+                <div class="org-icon"><img src="embajada_rusia.jpg" alt="Embajada de Rusia en Bolivia" class="remove-bg-dark"></div>
+                <div class="org-name" data-es="Embajada de Rusia en Bolivia" data-en="Embassy of Russia in Bolivia">Embajada de Rusia en Bolivia</div>
             </div>
             <div class="organizer">
-                <div class="org-icon"><img src="UMSA.jpeg" alt="UMSA"></div>
-                <div class="org-name">UMSA</div>
+                <div class="org-icon"><img src="Rosatom.png" alt="ROSATOM" class="remove-bg-dark"></div>
+                <div class="org-name">ROSATOM</div>
             </div>
             <div class="organizer">
-                <div class="org-icon"><img src="Club_Ciencias_Nucleares.jpeg" alt="Club de Ciencias Nucleares"></div>
+                <div class="org-icon"><img src="ENERGY OF THE FUTURE.png" alt="ENERGY OF THE FUTURE"></div>
+                <div class="org-name">ENERGY OF THE FUTURE</div>
+            </div>
+            <div class="organizer">
+                <div class="org-icon"><img src="club_de_ciencias_nucleares.jpg" alt="Club de Ciencias Nucleares" class="remove-bg-dark"></div>
                 <div class="org-name" data-es="Club de Ciencias Nucleares" data-en="Nuclear Science Club">Club de Ciencias Nucleares</div>
             </div>
             <div class="organizer">
-                <div class="org-icon"><img src="Embajada_de_Rusia.jpeg" alt="Embajada de Rusia"></div>
-                <div class="org-name" data-es="Embajada de Rusia" data-en="Embassy of Russia">Embajada de Rusia</div>
-            </div>
-            <div class="organizer">
-                <div class="org-icon"><img src="Ministerio_de_Educacion.jpeg" alt="Ministerio de Educación"></div>
-                <div class="org-name" data-es="Ministerio de Educación" data-en="Ministry of Education">Ministerio de Educación</div>
+                <div class="org-icon"><img src="UMSA.jpg" alt="UMSA" class="remove-bg-light"></div>
+                <div class="org-name">UMSA</div>
             </div>
         </div>
     </section>
@@ -798,16 +810,16 @@
 
         <div class="schedule-tabs">
             <button class="schedule-tab active" onclick="showDay('day1')">
-                <i class="fas fa-calendar-day"></i> <span data-es="MARTES 08" data-en="TUESDAY 08">MARTES 08</span>
+                <i class="fas fa-calendar-day"></i> <span data-es="LUNES 08" data-en="MONDAY 08">LUNES 08</span>
             </button>
             <button class="schedule-tab" onclick="showDay('day2')">
-                <i class="fas fa-calendar-day"></i> <span data-es="MIÉRCOLES 09" data-en="WEDNESDAY 09">MIÉRCOLES 09</span>
+                <i class="fas fa-calendar-day"></i> <span data-es="MARTES 09" data-en="TUESDAY 09">MARTES 09</span>
             </button>
             <button class="schedule-tab" onclick="showDay('day3')">
-                <i class="fas fa-calendar-day"></i> <span data-es="JUEVES 10" data-en="THURSDAY 10">JUEVES 10</span>
+                <i class="fas fa-calendar-day"></i> <span data-es="MIÉRCOLES 10" data-en="WEDNESDAY 10">MIÉRCOLES 10</span>
             </button>
             <button class="schedule-tab" onclick="showDay('day4')">
-                <i class="fas fa-calendar-day"></i> <span data-es="VIERNES 11" data-en="FRIDAY 11">VIERNES 11</span>
+                <i class="fas fa-calendar-day"></i> <span data-es="JUEVES 11" data-en="THURSDAY 11">JUEVES 11</span>
             </button>
         </div>
 
@@ -816,21 +828,21 @@
             <div class="day-header">
                 <span class="day-number">01</span>
                 <div class="day-details">
-                    <h3 data-es="Martes 8 de Septiembre" data-en="Tuesday, September 8">Martes 8 de Septiembre</h3>
-                    <p class="location"><i class="fas fa-map-marker-alt"></i> <span data-es="Auditorio Avelino Siñani — Ministerio de Educación" data-en="Avelino Siñani Auditorium — Ministry of Education">Auditorio Avelino Siñani — Ministerio de Educación</span></p>
+                    <h3 data-es="Lunes 8 de Septiembre" data-en="Monday, September 8">Lunes 8 de Septiembre</h3>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> <span data-es="Ministerio de Educación" data-en="Ministry of Education">Ministerio de Educación</span></p>
                 </div>
             </div>
             <table class="schedule-table">
-                <tr><td>14:00 — 14:30</td><td data-es="Registro e inscripción de participantes" data-en="Participant registration">Registro e inscripción de participantes</td><td data-es="Equipo organizador" data-en="Organizing team">Equipo organizador</td></tr>
-                <tr><td>14:30 — 15:00</td><td data-es="Ceremonia de apertura del Festival" data-en="Festival opening ceremony">Ceremonia de apertura del Festival</td><td>Asmik Kosyan, Kevin Job, Brian Ayala, M. Eugenia García, René Soria, D. Verchenko, R. Sanjinés</td></tr>
-                <tr class="highlight"><td>15:00 — 16:10</td><td data-es="🚀 'Esto es simplemente el espacio' — Tecnología nuclear en el universo" data-en="🚀 'This is simply space' — Nuclear technology in the universe">🚀 "Esto es simplemente el espacio" — Tecnología nuclear en el universo</td><td data-es="Cosmonauta Sergey V. Korsakov" data-en="Cosmonaut Sergey V. Korsakov">Cosmonauta Sergey V. Korsakov</td></tr>
-                <tr><td>16:10 — 16:40</td><td data-es="Los horizontes actuales del desarrollo de la tecnología nuclear en Sudamérica" data-en="Current horizons of nuclear technology development in South America">Los horizontes actuales del desarrollo de la tecnología nuclear en Sudamérica</td><td>Asmik Kosyan / ABEN</td></tr>
-                <tr><td>16:40 — 17:10</td><td>☕ Coffee-break</td><td>—</td></tr>
-                <tr><td>17:10 — 17:40</td><td data-es="'¿Qué es un átomo? La ciencia está explicada'" data-en="'What is an atom? Science explained'">"¿Qué es un átomo? La ciencia está explicada"</td><td>Ronald Winkelmann</td></tr>
-                <tr><td>17:40 — 18:10</td><td data-es="Juego científico 'Cosmódromo Oriental'" data-en="Scientific game 'Oriental Cosmodrome'">Juego científico "Cosmódromo Oriental"</td><td data-es="Interacción en equipos" data-en="Team interaction">Interacción en equipos</td></tr>
-                <tr><td>18:10 — 18:40</td><td data-es="Exploración espacial y Ciencias Nucleares" data-en="Space exploration and Nuclear Sciences">Exploración espacial y Ciencias Nucleares</td><td>Mauricio Ayllon</td></tr>
-                <tr><td>18:40 — 19:10</td><td data-es="Computadora basada en mecánica cuántica" data-en="Quantum mechanics based computer">Computadora basada en mecánica cuántica</td><td>Carla Mariela Quispe Flores</td></tr>
-                <tr><td>19:10 — 19:30</td><td data-es="Premiación a equipos ganadores" data-en="Awards to winning teams">Premiación a equipos ganadores</td><td>—</td></tr>
+                <tr><td>14:00 — 14:30</td><td data-es="Inscripción de participantes" data-en="Participant registration">Inscripción de participantes</td><td data-es="Equipo organizador" data-en="Organizing team">Equipo organizador</td></tr>
+                <tr><td>14:30 — 15:00</td><td data-es="Ceremonia de Inauguración del Festival" data-en="Festival Opening Ceremony">Ceremonia de Inauguración del Festival</td><td data-es="Palabras de bienvenida del organizador del Festival y de los invitados de honor" data-en="Welcome words from the Festival organizer and honorary guests">Palabras de bienvenida del organizador del Festival y de los invitados de honor</td></tr>
+                <tr class="highlight"><td>15:00 — 16:10</td><td data-es="🚀 'Esto es simplemente el espacio' — Tecnologías nucleares en la exploración del universo" data-en="🚀 'This is simply space' — Nuclear technologies in the exploration of the universe">🚀 "Esto es simplemente el espacio" — Tecnologías nucleares en la exploración del universo</td><td data-es="Cosmonauta Sergey V. Korsakov" data-en="Cosmonaut Sergey V. Korsakov">Cosmonauta Sergey V. Korsakov</td></tr>
+                <tr><td>16:10 — 16:40</td><td data-es="Horizontes actuales del desarrollo de tecnologías nucleares en Sudamérica" data-en="Current horizons of nuclear technology development in South America">Horizontes actuales del desarrollo de tecnologías nucleares en Sudamérica</td><td>Asmik (Empresa Privada RMS) / ABEN</td></tr>
+                <tr><td>16:40 — 17:10</td><td data-es="Conversación científica: ¿Qué es un átomo? La ciencia explicada" data-en="Scientific conversation: What is an atom? Science explained">Conversación científica: ¿Qué es un átomo? La ciencia explicada</td><td>Ronald Winkelmann — Profesor Departamento de Física UMSA</td></tr>
+                <tr><td>17:10 — 17:40</td><td>☕ Descanso</td><td>—</td></tr>
+                <tr><td>17:40 — 18:10</td><td data-es="Exploración espacial y Ciencias Nucleares" data-en="Space exploration and Nuclear Sciences">Exploración espacial y Ciencias Nucleares</td><td>Mauricio Ayllón</td></tr>
+                <tr><td>18:10 — 18:40</td><td data-es="Principios de la mecánica cuántica" data-en="Principles of quantum mechanics">Principios de la mecánica cuántica</td><td>Karla Mariela — Especialización en mecánica cuántica</td></tr>
+                <tr><td>18:40 — 19:10</td><td data-es="Juego científico: Cosmódromo Vostochni" data-en="Scientific game: Oriental Cosmodrome">Juego científico: Cosmódromo Vostochni</td><td data-es="Juego por equipos" data-en="Team game">Juego por equipos</td></tr>
+                <tr><td>19:10 — 19:30</td><td data-es="Premiación de los equipos ganadores" data-en="Awards to winning teams">Premiación de los equipos ganadores</td><td>—</td></tr>
             </table>
         </div>
 
@@ -839,20 +851,19 @@
             <div class="day-header">
                 <span class="day-number">02</span>
                 <div class="day-details">
-                    <h3 data-es="Miércoles 9 de Septiembre" data-en="Wednesday, September 9">Miércoles 9 de Septiembre</h3>
-                    <p class="location"><i class="fas fa-map-marker-alt"></i> <span data-es="Paraninfo Monoblock — Universidad Mayor de San Andrés (UMSA)" data-en="Monoblock Auditorium — Universidad Mayor de San Andrés (UMSA)">Paraninfo Monoblock — Universidad Mayor de San Andrés (UMSA)</span></p>
+                    <h3 data-es="Martes 9 de Septiembre" data-en="Tuesday, September 9">Martes 9 de Septiembre</h3>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> <span data-es="Universidad Mayor de San Andrés (UMSA)" data-en="Universidad Mayor de San Andrés (UMSA)">Universidad Mayor de San Andrés (UMSA)</span></p>
                 </div>
             </div>
             <table class="schedule-table">
-                <tr><td>14:00 — 14:30</td><td data-es="Registro e inscripción de participantes" data-en="Participant registration">Registro e inscripción de participantes</td><td data-es="Equipo organizador" data-en="Organizing team">Equipo organizador</td></tr>
-                <tr><td>14:30 — 15:00</td><td data-es="Ceremonia de apertura del Festival" data-en="Festival opening ceremony">Ceremonia de apertura del Festival</td><td data-es="Autoridades e invitados especiales" data-en="Authorities and special guests">Autoridades e invitados especiales</td></tr>
-                <tr><td>15:00 — 15:30</td><td data-es="Becas y estudios en Rusia" data-en="Scholarships and studies in Russia">Becas y estudios en Rusia</td><td data-es="Embajada de Rusia" data-en="Embassy of Russia">Embajada de Rusia</td></tr>
-                <tr class="highlight"><td>15:30 — 16:40</td><td data-es="🚀 'Esto es simplemente el espacio'" data-en="🚀 'This is simply space'">🚀 "Esto es simplemente el espacio"</td><td data-es="Cosmonauta Sergey V. Korsakov" data-en="Cosmonaut Sergey V. Korsakov">Cosmonauta Sergey V. Korsakov</td></tr>
-                <tr><td>16:40 — 17:10</td><td data-es="Efectos positivos de la radiación en los alimentos" data-en="Positive effects of radiation on food">Efectos positivos de la radiación en los alimentos</td><td>Cristian Condori</td></tr>
-                <tr><td>17:10 — 17:40</td><td data-es="Reactor de investigación" data-en="Research reactor">Reactor de investigación</td><td>Mikhail Obukhov (Rosatom)</td></tr>
-                <tr><td>17:40 — 18:10</td><td>☕ Coffee-break</td><td>—</td></tr>
-                <tr><td>18:10 — 18:40</td><td data-es="Seguridad nuclear, tratamiento de desechos radiológicos" data-en="Nuclear safety, radioactive waste treatment">Seguridad nuclear, tratamiento de desechos radiológicos</td><td>Julio dek Oliveira</td></tr>
-                <tr><td>18:40 — 19:20</td><td data-es="Conferencias Académicas" data-en="Academic Conferences">Conferencias Académicas</td><td data-es="Ponentes Universitarios" data-en="University Speakers">Ponentes Universitarios</td></tr>
+                <tr><td>14:00 — 14:30</td><td data-es="Inscripción de participantes" data-en="Participant registration">Inscripción de participantes</td><td data-es="Equipo organizador" data-en="Organizing team">Equipo organizador</td></tr>
+                <tr><td>14:30 — 15:00</td><td data-es="Ceremonia de Inauguración del Festival" data-en="Festival Opening Ceremony">Ceremonia de Inauguración del Festival</td><td data-es="Palabras de bienvenida del organizador del Festival y de los invitados de honor" data-en="Welcome words from the Festival organizer and honorary guests">Palabras de bienvenida del organizador del Festival y de los invitados de honor</td></tr>
+                <tr><td>15:00 — 15:30</td><td data-es="🎓 Becas y estudios en Rusia" data-en="🎓 Scholarships and studies in Russia">🎓 Becas y estudios en Rusia</td><td data-es="Embajada de Rusia + Natalia Camacho (estudiante MEPhI)" data-en="Embassy of Russia + Natalia Camacho (MEPhI student)">Embajada de Rusia + Natalia Camacho (estudiante MEPhI)</td></tr>
+                <tr><td>15:30 — 16:10</td><td data-es="Seguridad nuclear, tratamiento de desechos radiológicos" data-en="Nuclear safety, radioactive waste treatment">Seguridad nuclear, tratamiento de desechos radiológicos</td><td>Dr. Julio de Oliveiro — Candidato a Doctor en Ciencias del IPEN</td></tr>
+                <tr class="highlight"><td>16:10 — 17:20</td><td data-es="🚀 'Esto es simplemente el espacio' — Tecnologías nucleares en la exploración del universo" data-en="🚀 'This is simply space' — Nuclear technologies in the exploration of the universe">🚀 "Esto es simplemente el espacio" — Tecnologías nucleares en la exploración del universo</td><td data-es="Cosmonauta Sergey V. Korsakov" data-en="Cosmonaut Sergey V. Korsakov">Cosmonauta Sergey V. Korsakov</td></tr>
+                <tr><td>17:20 — 17:50</td><td>☕ Descanso</td><td>—</td></tr>
+                <tr><td>17:50 — 18:40</td><td data-es="Reactor de investigación" data-en="Research reactor">Reactor de investigación</td><td>Mikhail Obukhov — GSPI (Rosatom)</td></tr>
+                <tr><td>18:40 — 19:20</td><td data-es="Efecto positivo de la radiación en los alimentos" data-en="Positive effect of radiation on food">Efecto positivo de la radiación en los alimentos</td><td>Cristian Condori</td></tr>
             </table>
         </div>
 
@@ -861,21 +872,18 @@
             <div class="day-header">
                 <span class="day-number">03</span>
                 <div class="day-details">
-                    <h3 data-es="Jueves 10 de Septiembre" data-en="Thursday, September 10">Jueves 10 de Septiembre</h3>
-                    <p class="location"><i class="fas fa-map-marker-alt"></i> <span data-es="UMSA y Tiwanaku" data-en="UMSA and Tiwanaku">UMSA y Tiwanaku</span></p>
+                    <h3 data-es="Miércoles 10 de Septiembre" data-en="Wednesday, September 10">Miércoles 10 de Septiembre</h3>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> <span data-es="Universidad Mayor de San Andrés (UMSA)" data-en="Universidad Mayor de San Andrés (UMSA)">Universidad Mayor de San Andrés (UMSA)</span></p>
                 </div>
             </div>
             <table class="schedule-table">
-                <tr><td>14:00 — 14:30</td><td data-es="Registro de participantes" data-en="Participant registration">Registro de participantes</td><td data-es="Equipo organizador" data-en="Organizing team">Equipo organizador</td></tr>
-                <tr><td>14:30 — 15:10</td><td data-es="'Los Detectores y su desarrollo tecnológico'" data-en="'Detectors and their technological development'">"Los Detectores y su desarrollo tecnológico"</td><td>Eduardo Gonzalo</td></tr>
-                <tr><td>15:10 — 16:40</td><td data-es="Ciclo del combustible nuclear" data-en="Nuclear fuel cycle">Ciclo del combustible nuclear</td><td>Roman Vasilyevich Fomin</td></tr>
-                <tr><td>16:40 — 17:30</td><td data-es="Instrumentación para control de radiación" data-en="Instrumentation for radiation control">Instrumentación para control de radiación</td><td>Tatiana Vadimovna Melnikova</td></tr>
-                <tr><td>17:30 — 18:00</td><td data-es="Almuerzo (Se entregará refrigerio al salir)" data-en="Lunch (Refreshment given on departure)">Almuerzo (Se entregará refrigerio al salir)</td><td>—</td></tr>
-                <tr><td>17:30 — 19:30</td><td data-es="Viaje a Tiwanaku (Traslado de 2 horas)" data-en="Trip to Tiwanaku (2-hour transfer)">Viaje a Tiwanaku (Traslado de 2 horas)</td><td data-es="Exclusivo 100 personas" data-en="Exclusive 100 people">Exclusivo 100 personas</td></tr>
-                <tr><td>19:30 — 20:00</td><td data-es="Planificación de astrofotografía" data-en="Astrophotography planning">Planificación de astrofotografía</td><td>Kevin Job</td></tr>
-                <tr><td>20:00 — 20:20</td><td data-es="Refrigerio extra" data-en="Extra refreshment">Refrigerio extra</td><td>—</td></tr>
-                <tr class="highlight"><td>20:20 — 22:00</td><td data-es="🌙 'Más cerca de las estrellas' — Noche astronómica" data-en="🌙 'Closer to the stars' — Astronomical night">🌙 "Más cerca de las estrellas" — Noche astronómica</td><td data-es="Sergey V. Korsakov" data-en="Sergey V. Korsakov">Sergey V. Korsakov</td></tr>
-                <tr><td>22:00 — 00:00</td><td data-es="Retorno a La Paz" data-en="Return to La Paz">Retorno a La Paz</td><td data-es="Transporte contratado" data-en="Chartered transport">Transporte contratado</td></tr>
+                <tr><td>14:00 — 14:30</td><td data-es="Inscripción de participantes" data-en="Participant registration">Inscripción de participantes</td><td data-es="Equipo organizador" data-en="Organizing team">Equipo organizador</td></tr>
+                <tr><td>14:30 — 15:10</td><td data-es="Coloquio: Detectores y su desarrollo tecnológico" data-en="Colloquium: Detectors and their technological development">Coloquio: Detectores y su desarrollo tecnológico</td><td>Eduardo Gonzalo — Jefe Laboratorio de Física Radiológica y Nuclear, UNMSM (Perú)</td></tr>
+                <tr><td>15:10 — 16:40</td><td data-es="Ciclo del combustible nuclear" data-en="Nuclear fuel cycle">Ciclo del combustible nuclear</td><td>Fomin Roman Vasilyevich — Obninsk Tekh</td></tr>
+                <tr><td>16:40 — 17:30</td><td data-es="Instrumentos de control radiológico + juego QR" data-en="Radiation control instruments + QR game">Instrumentos de control radiológico + juego QR</td><td>Melnikova Tatiana Vadimovna — Obninsk Tekh</td></tr>
+                <tr><td>17:30 — 18:00</td><td>☕ Descanso</td><td>—</td></tr>
+                <tr class="highlight"><td>17:30 — 22:00</td><td data-es="🌙 Sesión itinerante en el planetario + Observación de estrellas" data-en="🌙 Itinerant session at the planetarium + Star observation">🌙 Sesión itinerante en el planetario + Observación de estrellas</td><td>Kevin Job — Club de Ciencias Nucleares<br><em>(Exclusivo 100 personas)</em></td></tr>
+                <tr><td>20:00 — 22:00</td><td data-es="🌙 Velada astronómica en el Club de Astronáutica" data-en="🌙 Astronomical evening at the Astronautics Club">🌙 Velada astronómica en el Club de Astronáutica</td><td data-es="Diálogo informal y observación" data-en="Informal dialogue and observation">Diálogo informal y observación</td></tr>
             </table>
         </div>
 
@@ -884,20 +892,20 @@
             <div class="day-header">
                 <span class="day-number">04</span>
                 <div class="day-details">
-                    <h3 data-es="Viernes 11 de Septiembre" data-en="Friday, September 11">Viernes 11 de Septiembre</h3>
-                    <p class="location"><i class="fas fa-map-marker-alt"></i> <span data-es="Atrio y Paraninfo de la UMSA" data-en="Atrium and Auditorium of UMSA">Atrio y Paraninfo de la UMSA</span></p>
+                    <h3 data-es="Jueves 11 de Septiembre" data-en="Thursday, September 11">Jueves 11 de Septiembre</h3>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> <span data-es="Universidad Mayor de San Andrés (UMSA)" data-en="Universidad Mayor de San Andrés (UMSA)">Universidad Mayor de San Andrés (UMSA)</span></p>
                 </div>
             </div>
             <table class="schedule-table">
-                <tr class="highlight"><td>09:00 — 13:00</td><td data-es="🎪 Feria Científica y Académica Abierta (12 carpas)" data-en="🎪 Open Scientific and Academic Fair (12 tents)">🎪 Feria Científica y Académica Abierta (12 carpas)</td><td data-es="Expositores varios — Atrio" data-en="Various exhibitors — Atrium">Expositores varios — Atrio</td></tr>
-                <tr><td>09:30 — 10:30</td><td data-es="♟️ Gran final del torneo de ajedrez" data-en="♟️ Chess tournament grand final">♟️ Gran final del torneo de ajedrez</td><td data-es="Participantes clasificados" data-en="Qualified participants">Participantes clasificados</td></tr>
-                <tr class="highlight"><td>09:00 — 14:00</td><td data-es="🤖 HACKATHON ROBOTOMIC — Competencias de robots + Expo Robotomic" data-en="🤖 HACKATHON ROBOTOMIC — Robot competitions + Expo Robotomic">🤖 HACKATHON ROBOTOMIC — Competencias de robots + Expo Robotomic</td><td>María Belén</td></tr>
-                <tr><td>11:30 — 13:00</td><td data-es="Board game 'Lord of Nuclear Cycles'" data-en="Board game 'Lord of Nuclear Cycles'">Board game "Lord of Nuclear Cycles"</td><td>Tatiana Vadimovna Melnikova</td></tr>
-                <tr><td>14:00 — 14:30</td><td data-es="Salud: medicina avanzada para proteger la salud" data-en="Health: advanced medicine to protect health">Salud: medicina avanzada para proteger la salud</td><td>Wanda Natalia Camacho</td></tr>
-                <tr><td>14:30 — 15:00</td><td data-es="Sin secretos: tecnologías nucleares en la historia" data-en="No secrets: nuclear technologies in history">Sin secretos: tecnologías nucleares en la historia</td><td>Brian Ayala</td></tr>
-                <tr><td>15:00 — 15:40</td><td data-es="Taller 'Uso de detectores en Bolivia'" data-en="Workshop 'Use of detectors in Bolivia'">Taller "Uso de detectores en Bolivia"</td><td>Christian Romero</td></tr>
-                <tr><td>15:40 — 16:30</td><td data-es="Formación: reacción en cadena + Átomo en el hielo" data-en="Training: chain reaction + Atom on ice">Formación: reacción en cadena + Átomo en el hielo</td><td>Kevin, Brian y Asmik</td></tr>
-                <tr class="highlight"><td>16:30 — 17:30</td><td data-es="🏆 Ceremonia de clausura del festival y premiación" data-en="🏆 Festival closing ceremony and awards">🏆 Ceremonia de clausura del festival y premiación</td><td data-es="Comité Organizador" data-en="Organizing Committee">Comité Organizador</td></tr>
+                <tr class="highlight"><td>09:00 — 16:00</td><td data-es="🎓 Feria Académica de Proyectos — 12 tiendas (Espacio público)" data-en="🎓 Academic Projects Fair — 12 tents (Public space)">🎓 Feria Académica de Proyectos — 12 tiendas (Espacio público)</td><td data-es="Expositores varios — Atrio UMSA" data-en="Various exhibitors — UMSA Atrium">Expositores varios — Atrio UMSA</td></tr>
+                <tr><td>09:30 — 10:30</td><td data-es="♟️ Gran final del torneo de ajedrez (Espacio público)" data-en="♟️ Chess tournament grand final (Public space)">♟️ Gran final del torneo de ajedrez (Espacio público)</td><td data-es="Participantes clasificados" data-en="Qualified participants">Participantes clasificados</td></tr>
+                <tr class="highlight"><td>11:00 — 13:00</td><td data-es="🤖 Torneo de Robótica: Batallas de Robots — Competiciones de equipos ante el público" data-en="🤖 Robotics Tournament: Robot Battles — Team competitions before the audience">🤖 Torneo de Robótica: Batallas de Robots — Competiciones de equipos ante el público</td><td>María Belén — 15-20 equipos — Atrio de la Universidad</td></tr>
+                <tr><td>11:30 — 13:00</td><td data-es="Board game: 'Lord of Nuclear Cycles' (Señor de los Ciclos Nucleares)" data-en="Board game: 'Lord of Nuclear Cycles'">Board game: "Lord of Nuclear Cycles" (Señor de los Ciclos Nucleares)</td><td>Melnikova Tatiana Vadimovna — Obninsk Tekh<br><em>10 equipos (5-8 personas por equipo)</em></td></tr>
+                <tr><td>14:00 — 14:30</td><td data-es="Salud: medicina avanzada para proteger la salud de las personas" data-en="Health: advanced medicine to protect people's health">Salud: medicina avanzada para proteger la salud de las personas</td><td>Wanda Natalia Camacho — Estudiante MEPhI (medicina nuclear)</td></tr>
+                <tr><td>14:30 — 15:00</td><td data-es="Discusión pública: No hay secretos, tecnologías nucleares en la historia" data-en="Public discussion: No secrets, nuclear technologies in history">Discusión pública: No hay secretos, tecnologías nucleares en la historia</td><td>Brian Ayala — Club de Ciencias Nucleares</td></tr>
+                <tr><td>15:00 — 15:40</td><td data-es="Seminario: Uso de detectores en Bolivia" data-en="Seminar: Use of detectors in Bolivia">Seminario: Uso de detectores en Bolivia</td><td>Christian Romero</td></tr>
+                <tr><td>15:40 — 16:30</td><td data-es="Educación: Reacción en Cadenas + El Átomo en el Hielo" data-en="Education: Chain Reaction + Atom on Ice">Educación: Reacción en Cadenas + El Átomo en el Hielo</td><td data-es="Tutoría del equipo de HackAthon, Global Atomic Quiz y participantes de Rompehielos de Conocimientos" data-en="HackAthon team tutoring, Global Atomic Quiz and Icebreaker of Knowledge participants">Tutoría del equipo de HackAthon, Global Atomic Quiz y participantes de Rompehielos de Conocimientos</td></tr>
+                <tr class="highlight"><td>16:30 — 17:30</td><td data-es="🏆 Ceremonia de clausura del Festival" data-en="🏆 Festival closing ceremony">🏆 Ceremonia de clausura del Festival</td><td data-es="Comité Organizador" data-en="Organizing Committee">Comité Organizador</td></tr>
             </table>
         </div>
     </section>
@@ -909,39 +917,39 @@
         <div class="activities-grid">
             <div class="activity-card reveal">
                 <div class="card-icon">🤖</div>
-                <h3>NASCATHON ROBOTOMIC</h3>
-                <p data-es="Competencia de robots donde los equipos demostrarán sus habilidades en desarrollo tecnológico. Incluye demostraciones de robots seguidores de línea y robots recolectores." data-en="Robot competition where teams will demonstrate their skills in technological development. Includes line-follower and collector robot demonstrations.">Competencia de robots donde los equipos demostrarán sus habilidades en desarrollo tecnológico. Incluye demostraciones de robots seguidores de línea y robots recolectores.</p>
-                <span class="tag" data-es="Viernes 11 • 09:00 - 14:00" data-en="Friday 11 • 09:00 - 14:00">Viernes 11 • 09:00 - 14:00</span>
+                <h3>Torneo de Robótica: Batallas de Robots</h3>
+                <p data-es="Competiciones de robots ante el público. 15-20 equipos demostrando sus habilidades en desarrollo tecnológico." data-en="Robot competitions before the public. 15-20 teams demonstrating their technological development skills.">Competiciones de robots ante el público. 15-20 equipos demostrando sus habilidades en desarrollo tecnológico.</p>
+                <span class="tag" data-es="Jueves 11 • 11:00 - 13:00" data-en="Thursday 11 • 11:00 - 13:00">Jueves 11 • 11:00 - 13:00</span>
             </div>
             <div class="activity-card reveal">
                 <div class="card-icon">♟️</div>
                 <h3 data-es="Torneo de Ajedrez" data-en="Chess Tournament">Torneo de Ajedrez</h3>
-                <p data-es="Demuestra tu estrategia y razonamiento en el torneo oficial del Festival. Premios para los primeros lugares. Inscripción gratuita con cupos limitados." data-en="Show your strategy and reasoning in the official Festival tournament. Prizes for the top places. Free registration with limited spots.">Demuestra tu estrategia y razonamiento en el torneo oficial del Festival. Premios para los primeros lugares. Inscripción gratuita con cupos limitados.</p>
-                <span class="tag" data-es="Viernes 11 • 09:30 - 10:30" data-en="Friday 11 • 09:30 - 10:30">Viernes 11 • 09:30 - 10:30</span>
+                <p data-es="Demuestra tu estrategia y razonamiento en el torneo oficial del Festival. Gran final abierta al público. Inscripción gratuita con cupos limitados." data-en="Show your strategy and reasoning in the official Festival tournament. Grand final open to the public. Free registration with limited spots.">Demuestra tu estrategia y razonamiento en el torneo oficial del Festival. Gran final abierta al público. Inscripción gratuita con cupos limitados.</p>
+                <span class="tag" data-es="Jueves 11 • 09:30 - 10:30" data-en="Thursday 11 • 09:30 - 10:30">Jueves 11 • 09:30 - 10:30</span>
             </div>
             <div class="activity-card reveal">
                 <div class="card-icon">🌙</div>
-                <h3 data-es="Noche Astronómica" data-en="Astronomical Night">Noche Astronómica</h3>
-                <p data-es="'Más cerca de las estrellas' en Tiwanaku junto al cosmonauta Sergey Korsakov. Planificación de astrofotografía y observación del cielo." data-en="'Closer to the stars' in Tiwanaku with cosmonaut Sergey Korsakov. Astrophotography planning and sky observation.">'Más cerca de las estrellas' en Tiwanaku junto al cosmonauta Sergey Korsakov. Planificación de astrofotografía y observación del cielo.</p>
-                <span class="tag" data-es="Jueves 10 • 20:20 - 22:00" data-en="Thursday 10 • 20:20 - 22:00">Jueves 10 • 20:20 - 22:00</span>
+                <h3 data-es="Sesión Planetario y Observación de Estrellas" data-en="Planetarium Session and Star Observation">Sesión Planetario y Observación de Estrellas</h3>
+                <p data-es="Sesión itinerante en el planetario + observación de estrellas y velada astronómica en el Club de Astronáutica. Exclusivo 100 personas." data-en="Itinerant session at the planetarium + star observation and astronomical evening at the Astronautics Club. Exclusive 100 people.">Sesión itinerante en el planetario + observación de estrellas y velada astronómica en el Club de Astronáutica. Exclusivo 100 personas.</p>
+                <span class="tag" data-es="Miércoles 10 • 17:30 - 22:00" data-en="Wednesday 10 • 17:30 - 22:00">Miércoles 10 • 17:30 - 22:00</span>
             </div>
             <div class="activity-card reveal">
                 <div class="card-icon">🔬</div>
-                <h3 data-es="Feria Científica" data-en="Science Fair">Feria Científica</h3>
-                <p data-es="12 carpas con exposiciones interactivas, laboratorios, talleres y proyectos académicos. Acceso abierto para todo el público." data-en="12 tents with interactive exhibitions, laboratories, workshops and academic projects. Open access for the general public.">12 carpas con exposiciones interactivas, laboratorios, talleres y proyectos académicos. Acceso abierto para todo el público.</p>
-                <span class="tag" data-es="Viernes 11 • 09:00 - 13:00" data-en="Friday 11 • 09:00 - 13:00">Viernes 11 • 09:00 - 13:00</span>
+                <h3 data-es="Feria Académica de Proyectos" data-en="Academic Projects Fair">Feria Académica de Proyectos</h3>
+                <p data-es="12 tiendas con exposiciones interactivas, laboratorios, talleres y proyectos académicos. Acceso abierto para todo el público." data-en="12 tents with interactive exhibitions, laboratories, workshops and academic projects. Open access for the general public.">12 tiendas con exposiciones interactivas, laboratorios, talleres y proyectos académicos. Acceso abierto para todo el público.</p>
+                <span class="tag" data-es="Jueves 11 • 09:00 - 16:00" data-en="Thursday 11 • 09:00 - 16:00">Jueves 11 • 09:00 - 16:00</span>
             </div>
             <div class="activity-card reveal">
                 <div class="card-icon">⚛️</div>
                 <h3>Board Game Nuclear</h3>
-                <p data-es="'Lord of Nuclear Cycles' — Un juego de mesa para aprender sobre el ciclo del combustible nuclear de forma divertida e interactiva." data-en="'Lord of Nuclear Cycles' — A board game to learn about the nuclear fuel cycle in a fun and interactive way.">'Lord of Nuclear Cycles' — Un juego de mesa para aprender sobre el ciclo del combustible nuclear de forma divertida e interactiva.</p>
-                <span class="tag" data-es="Viernes 11 • 11:30 - 13:00" data-en="Friday 11 • 11:30 - 13:00">Viernes 11 • 11:30 - 13:00</span>
+                <p data-es="'Lord of Nuclear Cycles' (Señor de los Ciclos Nucleares) — Un juego de mesa para aprender sobre el ciclo del combustible nuclear. 10 equipos de 5-8 personas." data-en="'Lord of Nuclear Cycles' — A board game to learn about the nuclear fuel cycle. 10 teams of 5-8 people.">'Lord of Nuclear Cycles' (Señor de los Ciclos Nucleares) — Un juego de mesa para aprender sobre el ciclo del combustible nuclear. 10 equipos de 5-8 personas.</p>
+                <span class="tag" data-es="Jueves 11 • 11:30 - 13:00" data-en="Thursday 11 • 11:30 - 13:00">Jueves 11 • 11:30 - 13:00</span>
             </div>
             <div class="activity-card reveal">
                 <div class="card-icon">🎓</div>
                 <h3 data-es="Becas y Estudios en Rusia" data-en="Scholarships and Studies in Russia">Becas y Estudios en Rusia</h3>
-                <p data-es="Información sobre oportunidades de becas y estudios en Rusia, a cargo de la Embajada de Rusia en Bolivia." data-en="Information on scholarship and study opportunities in Russia, by the Embassy of Russia in Bolivia.">Información sobre oportunidades de becas y estudios en Rusia, a cargo de la Embajada de Rusia en Bolivia.</p>
-                <span class="tag" data-es="Miércoles 9 • 15:00 - 15:30" data-en="Wednesday 9 • 15:00 - 15:30">Miércoles 9 • 15:00 - 15:30</span>
+                <p data-es="Información sobre oportunidades de becas y estudios en Rusia, a cargo de la Embajada de Rusia en Bolivia + Natalia Camacho (estudiante MEPhI)." data-en="Information on scholarship and study opportunities in Russia, by the Embassy of Russia in Bolivia + Natalia Camacho (MEPhI student).">Información sobre oportunidades de becas y estudios en Rusia, a cargo de la Embajada de Rusia en Bolivia + Natalia Camacho (estudiante MEPhI).</p>
+                <span class="tag" data-es="Martes 9 • 15:00 - 15:30" data-en="Tuesday 9 • 15:00 - 15:30">Martes 9 • 15:00 - 15:30</span>
             </div>
         </div>
     </section>
@@ -974,8 +982,8 @@
                 </a>
             </div>
             <div class="cta-links">
-                <a href="https://chat.whatsapp.com/KCGQMcLAolcDEbG5VldxS6" target="_blank" class="cta-link">
-                    <i class="fab fa-whatsapp"></i> <span data-es="WhatsApp Hackathon ROBOTOMIC" data-en="WhatsApp Hackathon ROBOTOMIC">WhatsApp Hackathon ROBOTOMIC</span>
+                <a href="https://chat.whatsapp.com/KCGQMcLAolcDEbG5VldxS6?s=cl&p=a&ilr=4" target="_blank" class="cta-link">
+                    <i class="fab fa-whatsapp"></i>                     <span data-es="WhatsApp Torneo de Robótica" data-en="WhatsApp Robotics Tournament">WhatsApp Torneo de Robótica</span>
                 </a>
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSe28QJfVdP0_jPzkFAHjUy29CIlvy-fpIdbxX3w-glLBKwAog/viewform" target="_blank" class="cta-link">
                     <i class="fas fa-chess"></i> <span data-es="Inscripción Torneo Ajedrez" data-en="Chess Tournament Registration">Inscripción Torneo Ajedrez</span>
@@ -996,7 +1004,7 @@
 
     <!-- FOOTER -->
     <footer>
-        <p>© 2026 Festival de Ciencia Bolivia — Rosatom • UMSA • Club de Ciencias Nucleares</p>
+        <p>© 2026 Festival de Ciencia Bolivia — Embajada de Rusia en Bolivia • ROSATOM • ENERGY OF THE FUTURE • Club de Ciencias Nucleares • UMSA</p>
         <p style="margin-top: 0.5rem;"><span data-es="La Paz, Bolivia • Del 8 al 11 de septiembre" data-en="La Paz, Bolivia • September 8 to 11">La Paz, Bolivia • Del 8 al 11 de septiembre</span></p>
     </footer>
 
