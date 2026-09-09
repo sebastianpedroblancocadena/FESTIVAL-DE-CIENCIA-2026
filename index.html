@@ -1261,8 +1261,45 @@
 
         // ============ COUNTDOWN ============
         function updateCountdown() {
-            const eventDate = new Date('2026-09-08T14:00:00-04:00');
-            const diff = eventDate - new Date();
+            const now = new Date();
+            const eventStart = new Date('2026-09-08T14:00:00-04:00');
+            const eventEnd = new Date('2026-09-11T23:59:59-04:00');
+            const afterEvent = new Date('2026-09-12T00:00:00-04:00');
+
+            const countdownEl = document.getElementById('countdown');
+
+            // Durante el festival (8-11 septiembre)
+            if (now >= eventStart && now <= eventEnd) {
+                countdownEl.innerHTML = `
+                    <div style="text-align: center;">
+                        <div style="font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: #1EAE76; margin-bottom: 0.5rem;">
+                            ¡El Festival ya comenzó! 🎉
+                        </div>
+                        <div style="font-size: 1rem; color: rgba(255,255,255,0.8);">
+                            Los esperamos
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            // Después del festival (12 septiembre en adelante)
+            if (now > eventEnd) {
+                countdownEl.innerHTML = `
+                    <div style="text-align: center;">
+                        <div style="font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: #5CE1FF; margin-bottom: 0.5rem;">
+                            ¡Gracias por participar! (12 sept)
+                        </div>
+                        <div style="font-size: 1rem; color: rgba(255,255,255,0.8);">
+                            ¡Nos vemos en la próxima edición!
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            // Antes del festival - countdown normal
+            const diff = eventStart - now;
             if (diff <= 0) {
                 ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '00');
                 return;
